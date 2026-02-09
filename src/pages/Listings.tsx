@@ -24,26 +24,34 @@ const Listings = () => {
 
   return (
     <main className="pt-20 md:pt-24">
-      <section className="container py-10">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-          <h1 className="font-display text-3xl md:text-4xl font-semibold text-foreground">
-            Explore Spaces
-          </h1>
-          <p className="text-muted-foreground text-sm mt-2">
-            {filtered.length} {filtered.length === 1 ? "space" : "spaces"} available
-          </p>
-        </motion.div>
+      {/* Page header */}
+      <section className="luxury-section-dark py-16 md:py-20">
+        <div className="container">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+            <p className="text-primary text-xs font-medium tracking-[0.3em] uppercase mb-3">
+              Our Collection
+            </p>
+            <h1 className="font-display text-4xl md:text-5xl font-semibold text-white">
+              Explore Spaces
+            </h1>
+            <p className="text-white/40 text-sm mt-3 font-light">
+              {filtered.length} {filtered.length === 1 ? "space" : "spaces"} available
+            </p>
+          </motion.div>
+        </div>
+      </section>
 
+      <section className="container py-10">
         {/* Filters */}
-        <div className="mt-8 flex flex-col md:flex-row gap-4">
+        <div className="flex flex-col md:flex-row gap-4 pb-8 border-b border-border">
           <div className="relative flex-1 max-w-md">
-            <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+            <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
             <input
               type="text"
               placeholder="Search by name or location..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-9 pr-4 py-2.5 rounded-lg border border-border bg-background text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+              className="w-full pl-11 pr-4 py-3 rounded border border-border bg-background text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors font-light"
             />
           </div>
 
@@ -52,10 +60,10 @@ const Listings = () => {
               <button
                 key={t}
                 onClick={() => setType(t)}
-                className={`px-3.5 py-2 rounded-lg text-xs font-medium capitalize transition-colors ${
+                className={`px-4 py-2.5 rounded text-xs font-medium capitalize tracking-wide transition-all duration-300 ${
                   type === t
                     ? "bg-primary text-primary-foreground"
-                    : "bg-muted text-muted-foreground hover:bg-muted/80"
+                    : "bg-muted text-muted-foreground hover:text-foreground"
                 }`}
               >
                 {t === "all" ? "All Types" : t}
@@ -74,20 +82,24 @@ const Listings = () => {
               onChange={(e) => setMaxPrice(Number(e.target.value))}
               className="w-28 accent-primary"
             />
-            <span className="text-xs text-muted-foreground whitespace-nowrap">≤ ${maxPrice}/night</span>
+            <span className="text-xs text-muted-foreground whitespace-nowrap font-light">
+              ≤ ${maxPrice}/night
+            </span>
           </div>
         </div>
 
         {/* Grid */}
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filtered.map((listing, i) => (
             <ListingCard key={listing.id} listing={listing} index={i} />
           ))}
         </div>
 
         {filtered.length === 0 && (
-          <div className="text-center py-20">
-            <p className="text-muted-foreground">No spaces match your filters. Try adjusting your search.</p>
+          <div className="text-center py-24">
+            <p className="text-muted-foreground font-light">
+              No spaces match your filters. Try adjusting your search.
+            </p>
           </div>
         )}
       </section>

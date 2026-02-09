@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, MessageCircle, MapPin } from "lucide-react";
+import { Mail, Phone, MessageCircle, MapPin, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
 
 const Contact = () => {
@@ -14,52 +14,75 @@ const Contact = () => {
 
   return (
     <main className="pt-20 md:pt-24">
-      <section className="container py-16">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-lg mx-auto text-center mb-12">
-          <h1 className="font-display text-3xl md:text-4xl font-semibold text-foreground">Get in Touch</h1>
-          <p className="text-muted-foreground text-sm mt-2">We'd love to hear from you. Reach out any way you prefer.</p>
-        </motion.div>
+      {/* Hero header */}
+      <section className="luxury-section-dark py-16 md:py-20">
+        <div className="container text-center">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+            <p className="text-primary text-xs font-medium tracking-[0.3em] uppercase mb-3">Reach Out</p>
+            <h1 className="font-display text-4xl md:text-5xl font-semibold text-white">Get in Touch</h1>
+            <p className="text-white/40 text-sm mt-3 font-light max-w-md mx-auto">
+              We'd love to hear from you. Reach out any way you prefer.
+            </p>
+          </motion.div>
+        </div>
+      </section>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-4xl mx-auto">
+      <section className="container py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 max-w-4xl mx-auto">
           {/* Form */}
           <motion.form
             onSubmit={handleSubmit}
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="space-y-4"
+            className="space-y-5"
           >
-            <input
-              type="text"
-              placeholder="Your Name"
-              required
-              maxLength={100}
-              value={form.name}
-              onChange={(e) => setForm({ ...form, name: e.target.value })}
-              className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-            />
-            <input
-              type="email"
-              placeholder="Your Email"
-              required
-              maxLength={255}
-              value={form.email}
-              onChange={(e) => setForm({ ...form, email: e.target.value })}
-              className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-            />
-            <textarea
-              placeholder="Your Message"
-              required
-              maxLength={1000}
-              rows={5}
-              value={form.message}
-              onChange={(e) => setForm({ ...form, message: e.target.value })}
-              className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none"
-            />
+            <div>
+              <label className="text-xs font-medium tracking-wide uppercase text-foreground mb-2 block">
+                Your Name
+              </label>
+              <input
+                type="text"
+                placeholder="John Doe"
+                required
+                maxLength={100}
+                value={form.name}
+                onChange={(e) => setForm({ ...form, name: e.target.value })}
+                className="w-full px-4 py-3.5 rounded border border-border bg-background text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors font-light"
+              />
+            </div>
+            <div>
+              <label className="text-xs font-medium tracking-wide uppercase text-foreground mb-2 block">
+                Your Email
+              </label>
+              <input
+                type="email"
+                placeholder="john@example.com"
+                required
+                maxLength={255}
+                value={form.email}
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
+                className="w-full px-4 py-3.5 rounded border border-border bg-background text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors font-light"
+              />
+            </div>
+            <div>
+              <label className="text-xs font-medium tracking-wide uppercase text-foreground mb-2 block">
+                Message
+              </label>
+              <textarea
+                placeholder="Tell us what you're looking for..."
+                required
+                maxLength={1000}
+                rows={5}
+                value={form.message}
+                onChange={(e) => setForm({ ...form, message: e.target.value })}
+                className="w-full px-4 py-3.5 rounded border border-border bg-background text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors resize-none font-light"
+              />
+            </div>
             <button
               type="submit"
-              className="w-full bg-primary text-primary-foreground py-3 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
+              className="w-full bg-primary text-primary-foreground py-3.5 rounded text-sm font-medium tracking-wide uppercase hover:bg-primary/90 transition-all duration-300 inline-flex items-center justify-center gap-2"
             >
-              Send Message
+              Send Message <ArrowRight size={14} />
             </button>
           </motion.form>
 
@@ -67,8 +90,13 @@ const Contact = () => {
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="space-y-6"
+            className="space-y-8"
           >
+            <div>
+              <p className="text-primary text-xs font-medium tracking-[0.3em] uppercase mb-6">Contact Info</p>
+              <div className="luxury-divider mb-8" />
+            </div>
+
             {[
               { icon: Mail, label: "Email", value: "hello@comfyville.com", href: "mailto:hello@comfyville.com" },
               { icon: Phone, label: "Phone", value: "+1 (234) 567-890", href: "tel:+1234567890" },
@@ -76,13 +104,18 @@ const Contact = () => {
               { icon: MapPin, label: "Location", value: "Global — We operate worldwide", href: undefined },
             ].map(({ icon: Icon, label, value, href }) => (
               <div key={label} className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <Icon size={16} className="text-primary" />
+                <div className="w-12 h-12 rounded-full border border-border flex items-center justify-center flex-shrink-0">
+                  <Icon size={18} className="text-primary" />
                 </div>
                 <div>
-                  <p className="text-xs text-muted-foreground">{label}</p>
+                  <p className="text-xs text-muted-foreground tracking-wide uppercase">{label}</p>
                   {href ? (
-                    <a href={href} target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                    <a
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm font-medium text-foreground hover:text-primary transition-colors duration-300"
+                    >
                       {value}
                     </a>
                   ) : (

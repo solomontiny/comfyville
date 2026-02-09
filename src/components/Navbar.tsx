@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -12,23 +12,46 @@ const navLinks = [
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const { pathname } = useLocation();
 
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const isHome = pathname === "/";
+  const showDark = isHome && !scrolled;
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border/50">
-      <nav className="container flex items-center justify-between h-16 md:h-20">
-        <Link to="/" className="font-display text-xl md:text-2xl font-semibold tracking-tight text-foreground">
-          Comfy<span className="text-primary">ville</span>
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled
+          ? "bg-background/95 backdrop-blur-xl border-b border-border shadow-sm"
+          : isHome
+          ? "bg-transparent"
+          : "bg-background/95 backdrop-blur-xl border-b border-border"
+      }`}
+    >
+      <nav className="container flex items-center justify-between h-20">
+        <Link to="/" className="font-display text-2xl md:text-3xl font-semibold tracking-tight">
+          <span className={showDark ? "text-white" : "text-foreground"}>Comfy</span>
+          <span className="text-primary">ville</span>
         </Link>
 
         {/* Desktop */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-10">
           {navLinks.map((link) => (
             <Link
               key={link.to}
               to={link.to}
-              className={`text-sm font-medium transition-colors hover:text-primary ${
-                pathname === link.to ? "text-primary" : "text-muted-foreground"
+              className={`text-sm font-medium tracking-wide uppercase transition-colors duration-300 hover:text-primary ${
+                pathname === link.to
+                  ? "text-primary"
+                  : showDark
+                  ? "text-white/80"
+                  : "text-muted-foreground"
               }`}
             >
               {link.label}
@@ -36,15 +59,18 @@ const Navbar = () => {
           ))}
           <Link
             to="/listings"
-            className="bg-primary text-primary-foreground px-5 py-2.5 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
+            className="bg-primary text-primary-foreground px-6 py-2.5 rounded text-sm font-medium tracking-wide uppercase hover:bg-primary/90 transition-all duration-300"
           >
             Book Now
           </Link>
         </div>
 
         {/* Mobile toggle */}
-        <button onClick={() => setOpen(!open)} className="md:hidden text-foreground p-2">
-          {open ? <X size={22} /> : <Menu size={22} />}
+        <button
+          onClick={() => setOpen(!open)}
+          className={`md:hidden p-2 ${showDark ? "text-white" : "text-foreground"}`}
+        >
+          {open ? <X size={24} /> : <Menu size={24} />}
         </button>
       </nav>
 
@@ -57,13 +83,13 @@ const Navbar = () => {
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden bg-background border-b border-border overflow-hidden"
           >
-            <div className="container py-4 flex flex-col gap-3">
+            <div className="container py-6 flex flex-col gap-1">
               {navLinks.map((link) => (
                 <Link
                   key={link.to}
                   to={link.to}
                   onClick={() => setOpen(false)}
-                  className={`text-sm font-medium py-2 transition-colors ${
+                  className={`text-sm font-medium tracking-wide uppercase py-3 transition-colors border-b border-border/50 ${
                     pathname === link.to ? "text-primary" : "text-muted-foreground"
                   }`}
                 >
@@ -73,7 +99,7 @@ const Navbar = () => {
               <Link
                 to="/listings"
                 onClick={() => setOpen(false)}
-                className="bg-primary text-primary-foreground px-5 py-2.5 rounded-lg text-sm font-medium text-center mt-2"
+                className="bg-primary text-primary-foreground px-5 py-3 rounded text-sm font-medium text-center mt-4 uppercase tracking-wide"
               >
                 Book Now
               </Link>

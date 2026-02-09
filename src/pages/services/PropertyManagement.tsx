@@ -1,56 +1,44 @@
-import { motion } from "framer-motion";
 import { Settings, Wrench, ClipboardList, Users, BarChart3, Sparkles } from "lucide-react";
-import heroImage from "@/assets/hero-1.jpg";
-
-const features = [
-  { icon: ClipboardList, title: "Comprehensive Oversight", text: "We manage every aspect of your property—from tenant relations to maintenance schedules—so you don't have to." },
-  { icon: Wrench, title: "Maintenance & Repairs", text: "Our network of vetted contractors ensures prompt, quality repairs and regular upkeep to preserve property value." },
-  { icon: Users, title: "Tenant Management", text: "Screening, onboarding, rent collection, and dispute resolution—all handled professionally on your behalf." },
-  { icon: BarChart3, title: "Financial Reporting", text: "Transparent monthly reports covering income, expenses, and occupancy rates to keep you informed." },
-  { icon: Sparkles, title: "Facility Enhancement", text: "Proactive upgrades and renovations to keep your property competitive and attractive in the market." },
-  { icon: Settings, title: "Compliance & Legal", text: "We ensure your property meets all regulatory requirements, from safety codes to lease compliance." },
-];
+import ServicePageLayout from "@/components/ServicePageLayout";
+import heroImage from "@/assets/service-management.jpg";
 
 const PropertyManagement = () => (
-  <main className="pt-20 md:pt-24">
-    <section className="relative h-[55vh] min-h-[400px] flex items-center overflow-hidden">
-      <img src={heroImage} alt="Property Management" className="absolute inset-0 w-full h-full object-cover" />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70" />
-      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-primary to-transparent" />
-      <div className="container relative z-10">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-          <motion.div initial={{ width: 0 }} animate={{ width: 60 }} transition={{ duration: 0.8, delay: 0.3 }} className="h-[1px] bg-primary mb-6" />
-          <p className="text-white/50 text-xs tracking-[0.3em] uppercase mb-3">Our Services</p>
-          <h1 className="font-display text-4xl md:text-6xl font-bold text-white">Property Management & Facility Care</h1>
-        </motion.div>
-      </div>
-    </section>
-
-    <section className="container py-24 max-w-4xl">
-      <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-        <p className="text-primary text-xs font-medium tracking-[0.3em] uppercase mb-3">What We Offer</p>
-        <h2 className="font-display text-3xl md:text-4xl font-semibold text-foreground mb-6">We Take Care of Your Investment</h2>
-        <div className="luxury-divider mb-8" />
-        <p className="text-muted-foreground leading-relaxed text-lg font-light">
-          Owning property should be rewarding, not stressful. Comfyville's property management services handle everything from day-to-day operations to long-term strategy, ensuring your asset grows in value while you focus on what matters.
-        </p>
-      </motion.div>
-    </section>
-
-    <section className="luxury-section-dark py-24">
-      <div className="container">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          {features.map(({ icon: Icon, title, text }, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="p-8 border border-white/10 rounded-lg hover:border-primary/30 transition-all duration-500">
-              <div className="w-12 h-12 rounded-full border border-primary/30 flex items-center justify-center mb-5"><Icon size={20} className="text-primary" /></div>
-              <h3 className="font-display text-lg font-semibold text-white mb-3">{title}</h3>
-              <p className="text-white/60 text-sm leading-relaxed font-light">{text}</p>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  </main>
+  <ServicePageLayout
+    heroImage={heroImage}
+    heroLabel="Our Services"
+    heroTitle="Property Management & Facility Care"
+    heroSubtitle="Protecting your investment while maximizing returns. We handle the details so you enjoy the rewards."
+    introLabel="What We Offer"
+    introTitle="We Take Care of Your Investment"
+    introText="Owning property should be rewarding, not stressful. Comfyville's property management services handle everything from day-to-day operations to long-term strategy, ensuring your asset grows in value while you focus on what matters."
+    introText2="Our dedicated team of property managers, maintenance professionals, and financial analysts work together to deliver comprehensive oversight that protects and enhances your portfolio."
+    features={[
+      { icon: ClipboardList, title: "Comprehensive Oversight", text: "We manage every aspect of your property—from tenant relations to maintenance schedules—so you don't have to." },
+      { icon: Wrench, title: "Maintenance & Repairs", text: "Our network of vetted contractors ensures prompt, quality repairs and regular upkeep to preserve property value." },
+      { icon: Users, title: "Tenant Management", text: "Screening, onboarding, rent collection, and dispute resolution—all handled professionally on your behalf." },
+      { icon: BarChart3, title: "Financial Reporting", text: "Transparent monthly reports covering income, expenses, and occupancy rates to keep you informed." },
+      { icon: Sparkles, title: "Facility Enhancement", text: "Proactive upgrades and renovations to keep your property competitive and attractive in the market." },
+      { icon: Settings, title: "Compliance & Legal", text: "We ensure your property meets all regulatory requirements, from safety codes to lease compliance." },
+    ]}
+    stats={[
+      { value: "150+", label: "Properties Managed" },
+      { value: "95%", label: "Occupancy Rate" },
+      { value: "₦500M+", label: "Rent Collected" },
+      { value: "48hr", label: "Avg. Response Time" },
+    ]}
+    processTitle="Our Management Approach"
+    processSubtitle="The Process"
+    processSteps={[
+      { step: "01", title: "Property Assessment", description: "We conduct a thorough evaluation of your property's condition, market position, and revenue potential." },
+      { step: "02", title: "Strategy Development", description: "A customized management plan covering pricing, tenant targeting, maintenance schedules, and financial goals." },
+      { step: "03", title: "Active Management", description: "Day-to-day operations including tenant communication, rent collection, maintenance coordination, and inspections." },
+      { step: "04", title: "Reporting & Optimization", description: "Regular performance reports and proactive recommendations to maximize your property's value and income." },
+    ]}
+    quote="Since partnering with Comfyville, my rental income has increased by 30% and I haven't had to deal with a single tenant issue."
+    quoteAuthor="— Property Investor"
+    ctaTitle="Let Us Manage Your Property"
+    ctaText="Focus on what matters while we handle the rest."
+  />
 );
 
 export default PropertyManagement;

@@ -5,8 +5,9 @@ import { useAuth } from "@/hooks/useAuth";
 import { useFavorites } from "@/hooks/useFavorites";
 import { supabase } from "@/integrations/supabase/client";
 import { listings } from "@/data/listings";
-import { CalendarDays, Heart, Clock, MapPin, ArrowRight, Star, Users, LogIn } from "lucide-react";
+import { CalendarDays, Heart, Clock, MapPin, ArrowRight, Star, Users, LogIn, XCircle } from "lucide-react";
 import { format } from "date-fns";
+import { toast } from "sonner";
 
 interface Appointment {
   id: string;
@@ -24,6 +25,7 @@ const Dashboard = () => {
   const { favorites } = useFavorites();
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const [activeTab, setActiveTab] = useState<"appointments" | "favorites">("appointments");
+  const [cancelling, setCancelling] = useState<string | null>(null);
 
   useEffect(() => {
     if (!user) return;
@@ -37,6 +39,25 @@ const Dashboard = () => {
     };
     fetchAppointments();
   }, [user]);
+
+  const handleCancel = async (id: string) => {
+    setCancelling(id);
+    const { error } = await supabase
+      .from("appointments")
+      .update({ status: "cancelled" })
+      .eq("id", id)
+      .eq("user_id", user!.id);
+
+    if (error) {
+      toast.error("Failed to cancel appointment.");
+    } else {
+      setAppointments((prev) =>
+        prev.map((a) => (a.id === id ? { ...a, status: "cancelled" } : a))
+      );
+      toast.success("Appointment cancelled successfully.");
+    }
+    setCancelling(null);
+  };
 
   if (!user) {
     return (
@@ -154,9 +175,21 @@ const Dashboard = () => {
                         </span>
                       </div>
                     </div>
-                    <span className={`text-xs font-medium px-3 py-1.5 rounded-full tracking-wide uppercase w-fit ${statusColor(appt.status)}`}>
-                      {appt.status}
-                    </span>
+                    <div className="flex items-center gap-3">
+                      <span className={`text-xs font-medium px-3 py-1.5 rounded-full tracking-wide uppercase w-fit ${statusColor(appt.status)}`}>
+                        {appt.status}
+                      </span>
+                      {appt.status === "pending" && (
+                        <button
+                          onClick={() => handleCancel(appt.id)}
+                          disabled={cancelling === appt.id}
+                          className="inline-flex items-center gap-1.5 text-xs font-medium text-destructive hover:text-destructive/80 transition-colors disabled:opacity-50"
+                        >
+                          <XCircle size={14} />
+                          {cancelling === appt.id ? "Cancelling..." : "Cancel"}
+                        </button>
+                      )}
+                    </div>
                   </div>
                 </motion.div>
               ))

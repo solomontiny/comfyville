@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, LogIn, LogOut, User, LayoutDashboard } from "lucide-react";
+import { Menu, X, LogIn, LogOut, LayoutDashboard } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@/hooks/useAuth";
+import logo from "@/assets/logo.jpeg";
 
 const navLinks = [
   { to: "/", label: "Home" },
@@ -37,9 +38,12 @@ const Navbar = () => {
       }`}
     >
       <nav className="container flex items-center justify-between h-20">
-        <Link to="/" className="font-display text-2xl md:text-3xl font-semibold tracking-tight">
-          <span className={showDark ? "text-white" : "text-foreground"}>Comfy</span>
-          <span className="text-primary">ville</span>
+        <Link to="/" className="flex items-center gap-3">
+          <img src={logo} alt="Comfyville" className="w-10 h-10 rounded-lg object-cover" />
+          <span className="font-display text-2xl md:text-3xl font-semibold tracking-tight">
+            <span className={showDark ? "text-white" : "text-foreground"}>Comfy</span>
+            <span className="text-primary">ville</span>
+          </span>
         </Link>
 
         {/* Desktop */}

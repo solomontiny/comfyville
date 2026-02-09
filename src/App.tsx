@@ -7,6 +7,7 @@ import { AuthProvider } from "@/hooks/useAuth";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import ChatBot from "@/components/ChatBot";
 import Index from "./pages/Index";
 import Listings from "./pages/Listings";
 import ListingDetail from "./pages/ListingDetail";
@@ -38,6 +39,7 @@ const App = () => (
           </Routes>
           <Footer />
           <WhatsAppButton />
+          <ChatBot />
         </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>

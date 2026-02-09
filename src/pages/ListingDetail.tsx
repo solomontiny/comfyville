@@ -1,11 +1,12 @@
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Star, MapPin, Users, Bed, Bath, MessageCircle, ArrowLeft, Check } from "lucide-react";
+import { Star, MapPin, Users, Bed, Bath, MessageCircle, ArrowLeft, Check, CalendarDays } from "lucide-react";
 import { listings } from "@/data/listings";
 import { Calendar } from "@/components/ui/calendar";
 import { useState } from "react";
 import { addDays, isBefore, startOfDay } from "date-fns";
 import { toast } from "sonner";
+import AppointmentModal from "@/components/AppointmentModal";
 
 const ListingDetail = () => {
   const { id } = useParams();
@@ -13,6 +14,7 @@ const ListingDetail = () => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [checkIn, setCheckIn] = useState<Date>();
   const [checkOut, setCheckOut] = useState<Date>();
+  const [appointmentOpen, setAppointmentOpen] = useState(false);
 
   if (!listing) {
     return (
@@ -115,15 +117,24 @@ const ListingDetail = () => {
               </div>
             </div>
 
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 text-sm font-medium text-foreground border border-border px-6 py-3.5 rounded hover:border-primary hover:text-primary transition-all duration-300 tracking-wide"
-            >
-              <MessageCircle size={16} className="text-primary" />
-              Message on WhatsApp
-            </a>
+            <div className="flex flex-wrap gap-3">
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2.5 text-sm font-medium text-foreground border border-border px-6 py-3.5 rounded hover:border-primary hover:text-primary transition-all duration-300 tracking-wide"
+              >
+                <MessageCircle size={16} className="text-primary" />
+                Message on WhatsApp
+              </a>
+              <button
+                onClick={() => setAppointmentOpen(true)}
+                className="inline-flex items-center gap-2.5 text-sm font-medium bg-primary text-primary-foreground px-6 py-3.5 rounded hover:bg-primary/90 transition-all duration-300 tracking-wide uppercase"
+              >
+                <CalendarDays size={16} />
+                Schedule Viewing
+              </button>
+            </div>
           </div>
 
           {/* Booking sidebar */}
@@ -187,6 +198,12 @@ const ListingDetail = () => {
           </div>
         </div>
       </section>
+      <AppointmentModal
+        open={appointmentOpen}
+        onClose={() => setAppointmentOpen(false)}
+        listingTitle={listing.title}
+        whatsappNumber={listing.whatsapp.replace("+", "")}
+      />
     </main>
   );
 };

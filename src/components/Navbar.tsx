@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, LogIn, LogOut, LayoutDashboard } from "lucide-react";
+import { Menu, X, LogIn, LogOut, LayoutDashboard, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@/hooks/useAuth";
 import logo from "@/assets/logo.jpeg";
@@ -13,9 +13,21 @@ const navLinks = [
   { to: "/contact", label: "Contact" },
 ];
 
+const serviceLinks = [
+  { to: "/services/property-sales-rentals", label: "Property Sales & Rentals" },
+  { to: "/services/short-term-apartments", label: "Short-term & Serviced Apartments" },
+  { to: "/services/property-management", label: "Property Management & Facility Care" },
+  { to: "/services/land-investment", label: "Land & Investment Advisory" },
+  { to: "/services/luxury-interior", label: "Luxury Interior & Design Support" },
+  { to: "/services/investor-guidance", label: "Guidance for Investors & First-Time Buyers" },
+];
+
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const servicesRef = useRef<HTMLDivElement>(null);
   const { pathname } = useLocation();
   const { user, signOut } = useAuth();
 
@@ -25,8 +37,19 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (servicesRef.current && !servicesRef.current.contains(e.target as Node)) {
+        setServicesOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   const isHome = pathname === "/";
   const showDark = isHome && !scrolled;
+  const isServiceActive = pathname.startsWith("/services");
 
   return (
     <header
@@ -64,6 +87,46 @@ const Navbar = () => {
               {link.label}
             </Link>
           ))}
+
+          {/* Services dropdown */}
+          <div className="relative" ref={servicesRef}>
+            <button
+              onClick={() => setServicesOpen(!servicesOpen)}
+              className={`text-sm font-medium tracking-wide uppercase transition-colors duration-300 hover:text-primary flex items-center gap-1 ${
+                isServiceActive
+                  ? "text-primary"
+                  : showDark
+                  ? "text-white/80"
+                  : "text-muted-foreground"
+              }`}
+            >
+              Services <ChevronDown size={14} className={`transition-transform duration-200 ${servicesOpen ? "rotate-180" : ""}`} />
+            </button>
+            <AnimatePresence>
+              {servicesOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 8 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute top-full right-0 mt-3 w-72 bg-background border border-border rounded-lg shadow-xl overflow-hidden"
+                >
+                  {serviceLinks.map((link) => (
+                    <Link
+                      key={link.to}
+                      to={link.to}
+                      onClick={() => setServicesOpen(false)}
+                      className={`block px-5 py-3 text-sm font-medium transition-colors hover:bg-primary/5 hover:text-primary border-b border-border/50 last:border-0 ${
+                        pathname === link.to ? "text-primary bg-primary/5" : "text-muted-foreground"
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
 
           {user ? (
             <div className="flex items-center gap-4">
@@ -141,6 +204,40 @@ const Navbar = () => {
                   {link.label}
                 </Link>
               ))}
+
+              {/* Mobile Services */}
+              <button
+                onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                className={`text-sm font-medium tracking-wide uppercase py-3 transition-colors border-b border-border/50 flex items-center justify-between ${
+                  isServiceActive ? "text-primary" : "text-muted-foreground"
+                }`}
+              >
+                Services
+                <ChevronDown size={14} className={`transition-transform duration-200 ${mobileServicesOpen ? "rotate-180" : ""}`} />
+              </button>
+              <AnimatePresence>
+                {mobileServicesOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="overflow-hidden"
+                  >
+                    {serviceLinks.map((link) => (
+                      <Link
+                        key={link.to}
+                        to={link.to}
+                        onClick={() => { setOpen(false); setMobileServicesOpen(false); }}
+                        className={`block text-sm py-2.5 pl-4 transition-colors border-b border-border/30 ${
+                          pathname === link.to ? "text-primary" : "text-muted-foreground"
+                        }`}
+                      >
+                        {link.label}
+                      </Link>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
               {user ? (
                 <>

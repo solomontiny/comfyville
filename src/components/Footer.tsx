@@ -1,14 +1,22 @@
 import { Link } from "react-router-dom";
 import { Instagram, Mail, Phone, MessageCircle } from "lucide-react";
+import logo from "@/assets/logo.jpeg";
+
+const ADMIN_WHATSAPP = "09037098493";
+const ADMIN_EMAIL = "Villecomfy@gmail.com";
+const ADMIN_PHONE = "+2349037098493";
 
 const Footer = () => (
   <footer className="luxury-section-dark">
     <div className="container py-20">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
         <div className="md:col-span-1">
-          <Link to="/" className="font-display text-3xl font-semibold">
-            <span className="text-white">Comfy</span>
-            <span className="text-primary">ville</span>
+          <Link to="/" className="flex items-center gap-3">
+            <img src={logo} alt="Comfyville" className="w-10 h-10 rounded-lg object-cover" />
+            <span className="font-display text-3xl font-semibold">
+              <span className="text-white">Comfy</span>
+              <span className="text-primary">ville</span>
+            </span>
           </Link>
           <p className="text-white/50 text-sm mt-4 leading-relaxed font-light">
             Premium short-stays & property investments. Curated luxury, verified quality, unforgettable experiences.
@@ -54,9 +62,9 @@ const Footer = () => (
           <div className="flex gap-3">
             {[
               { icon: Instagram, href: "#" },
-              { icon: MessageCircle, href: "https://wa.me/1234567890" },
-              { icon: Mail, href: "mailto:hello@comfyville.com" },
-              { icon: Phone, href: "tel:+1234567890" },
+              { icon: MessageCircle, href: `https://wa.me/${ADMIN_WHATSAPP}` },
+              { icon: Mail, href: `mailto:${ADMIN_EMAIL}` },
+              { icon: Phone, href: `tel:${ADMIN_PHONE}` },
             ].map(({ icon: Icon, href }, i) => (
               <a
                 key={i}
@@ -69,6 +77,7 @@ const Footer = () => (
               </a>
             ))}
           </div>
+          <p className="text-white/30 text-xs mt-4 font-light">{ADMIN_EMAIL}</p>
         </div>
       </div>
 

@@ -8,6 +8,8 @@ import { addDays, isBefore, startOfDay } from "date-fns";
 import { toast } from "sonner";
 import AppointmentModal from "@/components/AppointmentModal";
 
+const ADMIN_WHATSAPP = "09037098493";
+
 const ListingDetail = () => {
   const { id } = useParams();
   const listing = listings.find((l) => l.id === id);
@@ -31,7 +33,7 @@ const ListingDetail = () => {
   const nights = checkIn && checkOut ? Math.ceil((checkOut.getTime() - checkIn.getTime()) / (1000 * 60 * 60 * 24)) : 0;
   const total = nights * listing.price;
 
-  const whatsappUrl = `https://wa.me/${listing.whatsapp.replace("+", "")}?text=${encodeURIComponent(
+  const whatsappUrl = `https://wa.me/${ADMIN_WHATSAPP}?text=${encodeURIComponent(
     `Hi, I'm interested in booking "${listing.title}" at Comfyville.${checkIn ? ` Check-in: ${checkIn.toLocaleDateString()}` : ""}${checkOut ? `, Check-out: ${checkOut.toLocaleDateString()}` : ""}`
   )}`;
 
@@ -201,8 +203,9 @@ const ListingDetail = () => {
       <AppointmentModal
         open={appointmentOpen}
         onClose={() => setAppointmentOpen(false)}
+        listingId={listing.id}
         listingTitle={listing.title}
-        whatsappNumber={listing.whatsapp.replace("+", "")}
+        whatsappNumber={ADMIN_WHATSAPP}
       />
     </main>
   );

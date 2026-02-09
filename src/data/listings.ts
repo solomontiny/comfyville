@@ -42,7 +42,7 @@ export const listings: Listing[] = [
     images: [listing1, listing4, listing5],
     description: "Experience paradise in this stunning beachfront villa. Floor-to-ceiling windows frame endless ocean views, while the infinity pool blends seamlessly with the horizon. Every detail has been curated for the discerning traveler.",
     amenities: ["Infinity Pool", "Ocean View", "Private Beach", "Chef's Kitchen", "Smart Home", "Wi-Fi", "Parking", "Air Conditioning"],
-    whatsapp: "+1234567890",
+    whatsapp: "+09037098493",
     available: true,
   },
   {
@@ -61,7 +61,7 @@ export const listings: Listing[] = [
     images: [listing2, listing5, listing1],
     description: "Perched above the Manhattan skyline, this penthouse offers breathtaking 360-degree views. Modern design meets ultimate comfort in this architectural masterpiece.",
     amenities: ["City View", "Rooftop Terrace", "Concierge", "Gym Access", "Smart Home", "Wi-Fi", "Doorman", "Air Conditioning"],
-    whatsapp: "+1234567890",
+    whatsapp: "+09037098493",
     available: true,
   },
   {
@@ -80,7 +80,7 @@ export const listings: Listing[] = [
     images: [listing3, listing6, listing4],
     description: "Nestled among towering pines, this luxury cabin is the ultimate escape. Vaulted ceilings, a stone fireplace, and floor-to-ceiling windows bring the outdoors in.",
     amenities: ["Fireplace", "Hot Tub", "Mountain View", "Hiking Trails", "BBQ", "Wi-Fi", "Parking", "Heating"],
-    whatsapp: "+1234567890",
+    whatsapp: "+09037098493",
     available: true,
   },
   {
@@ -99,7 +99,7 @@ export const listings: Listing[] = [
     images: [listing4, listing1, listing3],
     description: "A serene retreat surrounded by tropical gardens and rice paddies. This boutique suite combines Balinese craftsmanship with modern luxury amenities.",
     amenities: ["Garden View", "Private Pool", "Spa Access", "Breakfast", "Yoga Deck", "Wi-Fi", "Airport Transfer", "Air Conditioning"],
-    whatsapp: "+1234567890",
+    whatsapp: "+09037098493",
     available: true,
   },
   {
@@ -118,7 +118,7 @@ export const listings: Listing[] = [
     images: [listing5, listing2, listing4],
     description: "A curated design loft in the heart of London's creative quarter. Contemporary art, designer furniture, and all the comforts of a five-star hotel.",
     amenities: ["City View", "Designer Interior", "Smart TV", "Espresso Machine", "Washer/Dryer", "Wi-Fi", "Bike Storage", "Air Conditioning"],
-    whatsapp: "+1234567890",
+    whatsapp: "+09037098493",
     available: true,
   },
   {
@@ -137,7 +137,7 @@ export const listings: Listing[] = [
     images: [listing6, listing3, listing1],
     description: "Contemporary elegance on the shores of Lake Como. A private dock, mountain views, and Italian craftsmanship create an unforgettable lakeside experience.",
     amenities: ["Lake View", "Private Dock", "Heated Floors", "Wine Cellar", "Garden", "Wi-Fi", "Parking", "Air Conditioning"],
-    whatsapp: "+1234567890",
+    whatsapp: "+09037098493",
     available: false,
   },
 ];

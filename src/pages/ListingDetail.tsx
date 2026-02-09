@@ -1,14 +1,29 @@
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Star, MapPin, Users, Bed, Bath, MessageCircle, ArrowLeft, Check, CalendarDays } from "lucide-react";
+import { Star, MapPin, Users, Bed, Bath, MessageCircle, ArrowLeft, Check, CalendarDays, Heart } from "lucide-react";
 import { listings } from "@/data/listings";
 import { Calendar } from "@/components/ui/calendar";
 import { useState } from "react";
 import { addDays, isBefore, startOfDay } from "date-fns";
 import { toast } from "sonner";
 import AppointmentModal from "@/components/AppointmentModal";
+import { useFavorites } from "@/hooks/useFavorites";
 
 const ADMIN_WHATSAPP = "09037098493";
+
+const FavoriteButton = ({ listingId }: { listingId: string }) => {
+  const { isFavorite, toggleFavorite } = useFavorites();
+  const favorited = isFavorite(listingId);
+  return (
+    <button
+      onClick={() => toggleFavorite(listingId)}
+      className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-primary transition-all duration-300"
+      aria-label={favorited ? "Remove from favorites" : "Add to favorites"}
+    >
+      <Heart size={18} className={favorited ? "fill-red-500 text-red-500" : ""} />
+    </button>
+  );
+};
 
 const ListingDetail = () => {
   const { id } = useParams();
@@ -85,9 +100,12 @@ const ListingDetail = () => {
           {/* Details */}
           <div className="lg:col-span-2 space-y-10">
             <div>
-              <div className="flex items-center gap-2 text-muted-foreground text-xs tracking-wide uppercase mb-2">
-                <MapPin size={12} />
-                {listing.location}
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center gap-2 text-muted-foreground text-xs tracking-wide uppercase">
+                  <MapPin size={12} />
+                  {listing.location}
+                </div>
+                <FavoriteButton listingId={listing.id} />
               </div>
               <h1 className="font-display text-3xl md:text-4xl font-semibold text-foreground">{listing.title}</h1>
               <div className="flex items-center gap-5 mt-4 text-sm text-muted-foreground">

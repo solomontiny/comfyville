@@ -111,6 +111,15 @@ const Navbar = () => {
                   transition={{ duration: 0.2 }}
                   className="absolute top-full right-0 mt-3 w-72 bg-background border border-border rounded-lg shadow-xl overflow-hidden"
                 >
+                  <Link
+                    to="/services"
+                    onClick={() => setServicesOpen(false)}
+                    className={`block px-5 py-3 text-sm font-semibold transition-colors hover:bg-primary/5 hover:text-primary border-b border-border ${
+                      pathname === "/services" ? "text-primary bg-primary/5" : "text-foreground"
+                    }`}
+                  >
+                    View All Services
+                  </Link>
                   {serviceLinks.map((link) => (
                     <Link
                       key={link.to}

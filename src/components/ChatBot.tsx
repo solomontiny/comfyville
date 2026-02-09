@@ -1,12 +1,16 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageSquare, X, Send, Bot, User, Loader2 } from "lucide-react";
+import { MessageSquare, X, Send, Bot, User, Loader2, LogIn } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
+import { Link } from "react-router-dom";
 
 type Message = { role: "user" | "assistant"; content: string };
 
 const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/chat`;
 
 const ChatBot = () => {
+  const { user, session } = useAuth();
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     { role: "assistant", content: "Welcome to Comfyville! 🏡 I'm your luxury concierge. How can I help you find the perfect space today?" },
@@ -33,11 +37,18 @@ const ChatBot = () => {
     setMessages((prev) => [...prev, { role: "assistant", content: "" }]);
 
     try {
+      // Get fresh access token
+      const { data: sessionData } = await supabase.auth.getSession();
+      const accessToken = sessionData?.session?.access_token;
+      if (!accessToken) {
+        throw new Error("Please sign in to use the chat.");
+      }
+
       const resp = await fetch(CHAT_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+          Authorization: `Bearer ${accessToken}`,
         },
         body: JSON.stringify({ messages: updated }),
       });
@@ -170,23 +181,35 @@ const ChatBot = () => {
             </div>
 
             {/* Input */}
-            <div className="border-t border-border p-3 flex gap-2 flex-shrink-0">
-              <input
-                type="text"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && sendMessage()}
-                placeholder="Ask about our spaces..."
-                disabled={streaming}
-                className="flex-1 px-3 py-2 rounded border border-border bg-background text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors font-light disabled:opacity-50"
-              />
-              <button
-                onClick={sendMessage}
-                disabled={!input.trim() || streaming}
-                className="w-9 h-9 rounded bg-primary text-primary-foreground flex items-center justify-center hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                <Send size={14} />
-              </button>
+            <div className="border-t border-border p-3 flex-shrink-0">
+              {user ? (
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && sendMessage()}
+                    placeholder="Ask about our spaces..."
+                    disabled={streaming}
+                    className="flex-1 px-3 py-2 rounded border border-border bg-background text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors font-light disabled:opacity-50"
+                  />
+                  <button
+                    onClick={sendMessage}
+                    disabled={!input.trim() || streaming}
+                    className="w-9 h-9 rounded bg-primary text-primary-foreground flex items-center justify-center hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    <Send size={14} />
+                  </button>
+                </div>
+              ) : (
+                <Link
+                  to="/auth"
+                  className="flex items-center justify-center gap-2 w-full py-2.5 rounded bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors"
+                >
+                  <LogIn size={14} />
+                  Sign in to chat
+                </Link>
+              )}
             </div>
           </motion.div>
         )}

@@ -200,14 +200,16 @@ const Navbar = () => {
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden bg-background border-b border-border overflow-hidden"
           >
-            <div className="container py-6 flex flex-col gap-1">
+            <div className="container py-4 flex flex-col">
               {navLinks.map((link) => (
                 <Link
                   key={link.to}
                   to={link.to}
                   onClick={() => setOpen(false)}
-                  className={`text-sm font-medium tracking-wide uppercase py-3 transition-colors border-b border-border/50 ${
-                    pathname === link.to ? "text-primary" : "text-muted-foreground"
+                  className={`text-sm font-medium tracking-wide uppercase py-3 px-2 rounded-lg transition-all duration-200 ${
+                    pathname === link.to
+                      ? "text-primary bg-primary/5"
+                      : "text-muted-foreground active:bg-muted"
                   }`}
                 >
                   {link.label}
@@ -217,8 +219,8 @@ const Navbar = () => {
               {/* Mobile Services */}
               <button
                 onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
-                className={`text-sm font-medium tracking-wide uppercase py-3 transition-colors border-b border-border/50 flex items-center justify-between ${
-                  isServiceActive ? "text-primary" : "text-muted-foreground"
+                className={`text-sm font-medium tracking-wide uppercase py-3 px-2 rounded-lg transition-all duration-200 flex items-center justify-between ${
+                  isServiceActive ? "text-primary bg-primary/5" : "text-muted-foreground active:bg-muted"
                 }`}
               >
                 Services
@@ -230,14 +232,23 @@ const Navbar = () => {
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: "auto" }}
                     exit={{ opacity: 0, height: 0 }}
-                    className="overflow-hidden"
+                    className="overflow-hidden bg-muted/30 rounded-lg mb-1"
                   >
+                    <Link
+                      to="/services"
+                      onClick={() => { setOpen(false); setMobileServicesOpen(false); }}
+                      className={`block text-sm py-2.5 px-4 font-semibold transition-colors ${
+                        pathname === "/services" ? "text-primary" : "text-foreground"
+                      }`}
+                    >
+                      View All Services
+                    </Link>
                     {serviceLinks.map((link) => (
                       <Link
                         key={link.to}
                         to={link.to}
                         onClick={() => { setOpen(false); setMobileServicesOpen(false); }}
-                        className={`block text-sm py-2.5 pl-4 transition-colors border-b border-border/30 ${
+                        className={`block text-sm py-2.5 px-4 transition-colors ${
                           pathname === link.to ? "text-primary" : "text-muted-foreground"
                         }`}
                       >
@@ -248,38 +259,40 @@ const Navbar = () => {
                 )}
               </AnimatePresence>
 
-              {user ? (
-                <>
+              <div className="border-t border-border/50 mt-2 pt-2">
+                {user ? (
+                  <>
+                    <Link
+                      to="/dashboard"
+                      onClick={() => setOpen(false)}
+                      className={`text-sm font-medium tracking-wide uppercase py-3 px-2 rounded-lg transition-all duration-200 flex items-center gap-2 ${
+                        pathname === "/dashboard" ? "text-primary bg-primary/5" : "text-muted-foreground active:bg-muted"
+                      }`}
+                    >
+                      <LayoutDashboard size={14} /> Dashboard
+                    </Link>
+                    <button
+                      onClick={() => { signOut(); setOpen(false); }}
+                      className="text-sm font-medium tracking-wide uppercase py-3 px-2 rounded-lg text-muted-foreground text-left flex items-center gap-2 w-full active:bg-muted transition-all duration-200"
+                    >
+                      <LogOut size={14} /> Sign Out
+                    </button>
+                  </>
+                ) : (
                   <Link
-                    to="/dashboard"
+                    to="/auth"
                     onClick={() => setOpen(false)}
-                    className={`text-sm font-medium tracking-wide uppercase py-3 transition-colors border-b border-border/50 flex items-center gap-2 ${
-                      pathname === "/dashboard" ? "text-primary" : "text-muted-foreground"
-                    }`}
+                    className="text-sm font-medium tracking-wide uppercase py-3 px-2 rounded-lg text-muted-foreground flex items-center gap-2 active:bg-muted transition-all duration-200"
                   >
-                    <LayoutDashboard size={14} /> Dashboard
+                    <LogIn size={14} /> Sign In
                   </Link>
-                  <button
-                    onClick={() => { signOut(); setOpen(false); }}
-                    className="text-sm font-medium tracking-wide uppercase py-3 text-muted-foreground text-left border-b border-border/50 flex items-center gap-2"
-                  >
-                    <LogOut size={14} /> Sign Out
-                  </button>
-                </>
-              ) : (
-                <Link
-                  to="/auth"
-                  onClick={() => setOpen(false)}
-                  className="text-sm font-medium tracking-wide uppercase py-3 text-muted-foreground border-b border-border/50 flex items-center gap-2"
-                >
-                  <LogIn size={14} /> Sign In
-                </Link>
-              )}
+                )}
+              </div>
 
               <Link
                 to="/listings"
                 onClick={() => setOpen(false)}
-                className="bg-primary text-primary-foreground px-5 py-3 rounded text-sm font-medium text-center mt-4 uppercase tracking-wide"
+                className="bg-primary text-primary-foreground px-5 py-3.5 rounded-lg text-sm font-medium text-center mt-3 uppercase tracking-wide hover:bg-primary/90 transition-all duration-300"
               >
                 Book Now
               </Link>

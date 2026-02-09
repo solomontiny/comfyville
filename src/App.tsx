@@ -17,6 +17,7 @@ import Contact from "./pages/Contact";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
+import Services from "./pages/Services";
 import PropertySalesRentals from "./pages/services/PropertySalesRentals";
 import ShortTermApartments from "./pages/services/ShortTermApartments";
 import PropertyManagement from "./pages/services/PropertyManagement";
@@ -43,6 +44,7 @@ const App = () => (
             <Route path="/contact" element={<Contact />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/services" element={<Services />} />
             <Route path="/services/property-sales-rentals" element={<PropertySalesRentals />} />
             <Route path="/services/short-term-apartments" element={<ShortTermApartments />} />
             <Route path="/services/property-management" element={<PropertyManagement />} />

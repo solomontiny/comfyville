@@ -43,8 +43,21 @@ const AppointmentModal = ({
   const tomorrow = addDays(startOfDay(new Date()), 1);
 
   const handleConfirm = async () => {
-    if (!date || !time || !name) {
+    if (!date || !time || !name.trim()) {
       toast.error("Please fill in all required fields.");
+      return;
+    }
+
+    // Client-side validation
+    const trimmedName = name.trim();
+    if (trimmedName.length > 100 || !/^[a-zA-Z\s\-'.]+$/.test(trimmedName)) {
+      toast.error("Please enter a valid name (letters, spaces, hyphens only, max 100 chars).");
+      return;
+    }
+
+    const trimmedPhone = phone.trim();
+    if (trimmedPhone && (trimmedPhone.length > 20 || !/^[+0-9\s()-]+$/.test(trimmedPhone))) {
+      toast.error("Please enter a valid phone number.");
       return;
     }
 

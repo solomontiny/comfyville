@@ -9,7 +9,7 @@ const ADMIN_PHONE = "+2349037098493";
 const Footer = () => (
   <footer className="luxury-section-dark">
     <div className="container py-20">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
         <div className="md:col-span-1">
           <Link to="/" className="flex items-center gap-3">
             <img src={logo} alt="Comfyville" className="w-10 h-10 rounded-lg object-cover" />
@@ -32,6 +32,28 @@ const Footer = () => (
               { to: "/about", label: "About Us" },
               { to: "/mission-vision", label: "Mission & Vision" },
               { to: "/contact", label: "Contact" },
+            ].map((l) => (
+              <Link
+                key={l.to}
+                to={l.to}
+                className="text-sm text-white/50 hover:text-primary transition-colors duration-300 font-light"
+              >
+                {l.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <h4 className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-6">Services</h4>
+          <div className="flex flex-col gap-3">
+            {[
+              { to: "/services/property-sales-rentals", label: "Property Sales & Rentals" },
+              { to: "/services/short-term-apartments", label: "Short-term Apartments" },
+              { to: "/services/property-management", label: "Property Management" },
+              { to: "/services/land-investment", label: "Land & Investment" },
+              { to: "/services/luxury-interior", label: "Luxury Interior" },
+              { to: "/services/investor-guidance", label: "Investor Guidance" },
             ].map((l) => (
               <Link
                 key={l.to}

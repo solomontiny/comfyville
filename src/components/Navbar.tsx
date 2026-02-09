@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, LogIn, LogOut, User } from "lucide-react";
+import { Menu, X, LogIn, LogOut, User, LayoutDashboard } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@/hooks/useAuth";
 
@@ -62,10 +62,14 @@ const Navbar = () => {
 
           {user ? (
             <div className="flex items-center gap-4">
-              <span className={`text-xs font-light tracking-wide ${showDark ? "text-white/70" : "text-muted-foreground"}`}>
-                <User size={12} className="inline mr-1" />
-                {user.email?.split("@")[0]}
-              </span>
+              <Link
+                to="/dashboard"
+                className={`text-sm font-medium tracking-wide uppercase transition-colors duration-300 hover:text-primary flex items-center gap-1.5 ${
+                  pathname === "/dashboard" ? "text-primary" : showDark ? "text-white/80" : "text-muted-foreground"
+                }`}
+              >
+                <LayoutDashboard size={14} /> Dashboard
+              </Link>
               <button
                 onClick={() => signOut()}
                 className={`text-sm font-medium tracking-wide uppercase transition-colors duration-300 hover:text-primary flex items-center gap-1.5 ${
@@ -135,9 +139,15 @@ const Navbar = () => {
 
               {user ? (
                 <>
-                  <div className="text-xs text-muted-foreground py-3 border-b border-border/50 font-light">
-                    <User size={12} className="inline mr-1" /> {user.email}
-                  </div>
+                  <Link
+                    to="/dashboard"
+                    onClick={() => setOpen(false)}
+                    className={`text-sm font-medium tracking-wide uppercase py-3 transition-colors border-b border-border/50 flex items-center gap-2 ${
+                      pathname === "/dashboard" ? "text-primary" : "text-muted-foreground"
+                    }`}
+                  >
+                    <LayoutDashboard size={14} /> Dashboard
+                  </Link>
                   <button
                     onClick={() => { signOut(); setOpen(false); }}
                     className="text-sm font-medium tracking-wide uppercase py-3 text-muted-foreground text-left border-b border-border/50 flex items-center gap-2"

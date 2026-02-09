@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Instagram, Mail, Phone, MessageCircle } from "lucide-react";
 import logo from "@/assets/logo.jpeg";
 
-const ADMIN_WHATSAPP = "09037098493";
+const ADMIN_WHATSAPP = "2349037098493";
 const ADMIN_EMAIL = "Villecomfy@gmail.com";
 const ADMIN_PHONE = "+2349037098493";
 
@@ -30,6 +30,7 @@ const Footer = () => (
             {[
               { to: "/listings", label: "All Spaces" },
               { to: "/about", label: "About Us" },
+              { to: "/mission-vision", label: "Mission & Vision" },
               { to: "/contact", label: "Contact" },
             ].map((l) => (
               <Link

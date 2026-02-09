@@ -1,8 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, type LucideIcon } from "lucide-react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 
 interface Feature {
   icon: LucideIcon;
@@ -64,8 +62,6 @@ const ServicePageLayout = ({
   ctaLink = "/contact",
   ctaLabel = "Get in Touch",
 }: ServicePageLayoutProps) => (
-  <>
-    <Navbar />
     <main className="pt-20 md:pt-24">
       {/* Hero */}
       <section className="relative h-[65vh] min-h-[480px] flex items-end overflow-hidden">
@@ -210,8 +206,6 @@ const ServicePageLayout = ({
         </motion.div>
       </section>
     </main>
-    <Footer />
-  </>
 );
 
 export default ServicePageLayout;

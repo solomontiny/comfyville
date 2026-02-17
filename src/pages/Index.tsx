@@ -5,6 +5,7 @@ import heroImage from "@/assets/hero-1.jpg";
 import { listings } from "@/data/listings";
 import ListingCard from "@/components/ListingCard";
 import NewsletterSection from "@/components/NewsletterSection";
+import WebsiteRating from "@/components/WebsiteRating";
 
 const Index = () => {
   const featured = listings.filter((l) => l.available).slice(0, 3);
@@ -194,6 +195,7 @@ const Index = () => {
         </div>
       </section>
 
+      <WebsiteRating />
       <NewsletterSection />
     </main>
   );

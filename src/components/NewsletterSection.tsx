@@ -16,7 +16,7 @@ const NewsletterSection = () => {
 
   return (
     <section className="luxury-section-dark py-24">
-      <div className="container max-w-2xl text-center">
+      <div className="container px-5 md:px-8 max-w-2xl text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -31,7 +31,7 @@ const NewsletterSection = () => {
           <p className="text-white/50 text-sm mt-3 mb-8 font-light">
             Be the first to discover our latest premium spaces and exclusive offers.
           </p>
-          <form onSubmit={handleSubmit} className="flex gap-3 max-w-md mx-auto">
+          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
             <input
               type="email"
               value={email}

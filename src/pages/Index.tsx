@@ -24,7 +24,7 @@ const Index = () => {
         {/* Decorative gold line */}
         <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent" />
 
-        <div className="container relative z-10">
+        <div className="container relative z-10 px-5 md:px-8">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -82,7 +82,7 @@ const Index = () => {
 
       {/* Trust bar */}
       <section className="border-b border-border bg-background">
-        <div className="container py-6 flex flex-wrap items-center justify-center gap-10 md:gap-20">
+        <div className="container px-5 md:px-8 py-6 flex flex-wrap items-center justify-center gap-6 md:gap-20">
           {[
             { icon: Shield, label: "SSL Secured" },
             { icon: CheckCircle, label: "Verified Listings" },
@@ -97,7 +97,7 @@ const Index = () => {
       </section>
 
       {/* Why Comfyville */}
-      <section className="container py-24">
+      <section className="container px-5 md:px-8 py-16 md:py-24">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -148,9 +148,9 @@ const Index = () => {
       </section>
 
       {/* Featured */}
-      <section className="bg-secondary py-24">
-        <div className="container">
-          <div className="flex items-end justify-between mb-12">
+      <section className="bg-secondary py-16 md:py-24">
+        <div className="container px-5 md:px-8">
+          <div className="flex items-end justify-between mb-8 md:mb-12">
             <div>
               <p className="text-primary text-xs font-medium tracking-[0.3em] uppercase mb-2">Featured</p>
               <h2 className="font-display text-3xl md:text-4xl font-semibold text-foreground">
@@ -173,8 +173,8 @@ const Index = () => {
       </section>
 
       {/* Testimonial */}
-      <section className="py-24">
-        <div className="container max-w-3xl text-center">
+      <section className="py-16 md:py-24">
+        <div className="container px-5 md:px-8 max-w-3xl text-center">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}

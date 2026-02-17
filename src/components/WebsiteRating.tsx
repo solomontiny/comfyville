@@ -22,7 +22,7 @@ const WebsiteRating = () => {
 
   return (
     <section className="bg-secondary py-20">
-      <div className="container max-w-2xl text-center">
+      <div className="container px-5 md:px-8 max-w-2xl text-center">
         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
           <p className="text-primary text-xs font-medium tracking-[0.3em] uppercase mb-3">Your Opinion Matters</p>
           <h2 className="font-display text-3xl md:text-4xl font-semibold text-foreground mb-2">

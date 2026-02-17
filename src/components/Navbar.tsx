@@ -76,7 +76,7 @@ const Navbar = () => {
           : "bg-background/95 backdrop-blur-xl border-b border-border"
       }`}
     >
-      <nav className="container flex items-center justify-between h-20">
+      <nav className="container px-5 md:px-8 flex items-center justify-between h-20">
         <Link to="/" className="flex items-center gap-3">
           <img src={logo} alt="Comfyville" className="w-10 h-10 rounded-lg object-cover" />
           <span className="font-display text-2xl md:text-3xl font-semibold tracking-tight">
@@ -224,7 +224,7 @@ const Navbar = () => {
             exit={{ opacity: 0, height: 0 }}
             className="lg:hidden bg-background border-b border-border overflow-hidden"
           >
-            <div className="container py-4 flex flex-col">
+            <div className="container px-5 md:px-8 py-4 flex flex-col">
               {primaryLinks.map((link) => (
                 <Link
                   key={link.to}

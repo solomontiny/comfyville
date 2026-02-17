@@ -16,7 +16,7 @@ const Contact = () => {
     <main className="pt-20 md:pt-24">
       {/* Hero header */}
       <section className="luxury-section-dark py-16 md:py-20">
-        <div className="container text-center">
+        <div className="container px-5 md:px-8 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <p className="text-primary text-xs font-medium tracking-[0.3em] uppercase mb-3">Reach Out</p>
             <h1 className="font-display text-4xl md:text-5xl font-semibold text-white">Get in Touch</h1>
@@ -27,7 +27,7 @@ const Contact = () => {
         </div>
       </section>
 
-      <section className="container py-16">
+      <section className="container px-5 md:px-8 py-12 md:py-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 max-w-4xl mx-auto">
           {/* Form */}
           <motion.form

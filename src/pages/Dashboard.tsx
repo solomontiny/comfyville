@@ -3,8 +3,10 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { useFavorites } from "@/hooks/useFavorites";
+import { useNotifications } from "@/hooks/useNotifications";
 import { supabase } from "@/integrations/supabase/client";
 import { listings } from "@/data/listings";
+import DashboardHeader from "@/components/dashboard/DashboardHeader";
 import { CalendarDays, Heart, Clock, MapPin, ArrowRight, Star, Users, LogIn, XCircle } from "lucide-react";
 import { format } from "date-fns";
 import { toast } from "sonner";
@@ -23,12 +25,16 @@ interface Appointment {
 const Dashboard = () => {
   const { user } = useAuth();
   const { favorites } = useFavorites();
+  const { notifications, unreadCount, markAsRead, markAllAsRead } = useNotifications();
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const [activeTab, setActiveTab] = useState<"appointments" | "favorites">("appointments");
   const [cancelling, setCancelling] = useState<string | null>(null);
+  const [lastSignIn, setLastSignIn] = useState<string | null>(null);
 
   useEffect(() => {
     if (!user) return;
+
+    // Fetch appointments
     const fetchAppointments = async () => {
       const { data } = await supabase
         .from("appointments")
@@ -37,7 +43,25 @@ const Dashboard = () => {
         .order("appointment_date", { ascending: true });
       if (data) setAppointments(data);
     };
+
+    // Fetch last sign in from profile
+    const fetchProfile = async () => {
+      const { data } = await supabase
+        .from("profiles")
+        .select("last_sign_in_at")
+        .eq("user_id", user.id)
+        .single();
+      if (data?.last_sign_in_at) setLastSignIn(data.last_sign_in_at);
+
+      // Update last_sign_in_at to now
+      await supabase
+        .from("profiles")
+        .update({ last_sign_in_at: new Date().toISOString() })
+        .eq("user_id", user.id);
+    };
+
     fetchAppointments();
+    fetchProfile();
   }, [user]);
 
   const handleCancel = async (id: string) => {
@@ -93,19 +117,19 @@ const Dashboard = () => {
 
   return (
     <main className="pt-20 md:pt-24">
-      <section className="container py-8">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-          <p className="text-primary text-[10px] font-medium tracking-[0.3em] uppercase mb-2">Dashboard</p>
-          <h1 className="font-display text-3xl md:text-4xl font-semibold text-foreground">
-            Welcome, {user.user_metadata?.display_name || user.email?.split("@")[0]}
-          </h1>
-          <p className="text-muted-foreground text-sm mt-2 font-light">
-            Manage your appointments and favorite spaces.
-          </p>
-        </motion.div>
+      <section className="container py-6 md:py-8 space-y-6">
+        {/* Enhanced Header */}
+        <DashboardHeader
+          user={user}
+          notifications={notifications}
+          unreadCount={unreadCount}
+          markAsRead={markAsRead}
+          markAllAsRead={markAllAsRead}
+          lastSignIn={lastSignIn}
+        />
 
         {/* Tabs */}
-        <div className="flex items-center gap-1 mt-8 mb-6 bg-muted rounded-lg p-1 w-fit">
+        <div className="flex items-center gap-1 bg-muted rounded-lg p-1 w-fit">
           <button
             onClick={() => setActiveTab("appointments")}
             className={`px-5 py-2.5 rounded text-sm font-medium tracking-wide transition-all duration-300 ${

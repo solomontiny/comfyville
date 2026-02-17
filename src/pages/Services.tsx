@@ -59,7 +59,7 @@ const Services = () => (
     <section className="luxury-section-dark py-24 md:py-32 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/3" />
       <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-primary to-transparent" />
-      <div className="container relative z-10 text-center">
+      <div className="container px-5 md:px-8 relative z-10 text-center">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
           <motion.div initial={{ width: 0 }} animate={{ width: 60 }} transition={{ duration: 0.8, delay: 0.3 }} className="h-[1px] bg-primary mb-6 mx-auto" />
           <p className="text-white/50 text-xs tracking-[0.3em] uppercase mb-4">What We Do</p>
@@ -74,7 +74,7 @@ const Services = () => (
     </section>
 
     {/* Services Grid */}
-    <section className="container py-24">
+    <section className="container px-5 md:px-8 py-16 md:py-24">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {services.map((service, i) => {
           const Icon = service.icon;
@@ -123,7 +123,7 @@ const Services = () => (
 
     {/* CTA */}
     <section className="luxury-section-dark py-24">
-      <div className="container text-center">
+      <div className="container px-5 md:px-8 text-center">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
           <h2 className="font-display text-3xl md:text-4xl font-semibold text-white mb-4">Not Sure Where to Start?</h2>
           <p className="text-white/60 font-light mb-8 max-w-md mx-auto">

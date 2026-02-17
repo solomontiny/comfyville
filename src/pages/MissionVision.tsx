@@ -28,7 +28,7 @@ const MissionVision = () => (
       <img src={heroImage} alt="Mission & Vision" className="absolute inset-0 w-full h-full object-cover" />
       <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70" />
       <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-primary to-transparent" />
-      <div className="container relative z-10">
+      <div className="container px-5 md:px-8 relative z-10">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
           <motion.div
             initial={{ width: 0 }}
@@ -43,7 +43,7 @@ const MissionVision = () => (
     </section>
 
     {/* Vision */}
-    <section className="container py-24 max-w-3xl">
+    <section className="container px-5 md:px-8 py-16 md:py-24 max-w-3xl">
       <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
         <div className="flex items-center gap-3 mb-4">
           <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
@@ -63,8 +63,8 @@ const MissionVision = () => (
 
     {/* Mission */}
     <section className="luxury-section-dark py-24">
-      <div className="container">
-        <div className="text-center mb-16">
+      <div className="container px-5 md:px-8">
+        <div className="text-center mb-12 md:mb-16">
           <div className="flex items-center justify-center gap-3 mb-4">
             <div className="w-12 h-12 rounded-full border border-primary/30 flex items-center justify-center">
               <Target size={22} className="text-primary" />

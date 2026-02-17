@@ -11,7 +11,7 @@ const Footer = () => {
 
   return (
     <footer className="luxury-section-dark">
-      <div className="container py-16 md:py-20">
+      <div className="container px-5 md:px-8 py-16 md:py-20">
         {/* Logo section - prominent and centered on mobile */}
         <div className="flex flex-col items-center text-center mb-12 md:mb-0 md:hidden">
           <Link to="/" className="flex flex-col items-center gap-3" onClick={scrollToTop}>
@@ -131,12 +131,12 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-white/10 mt-12 md:mt-16 pt-6 md:pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="border-t border-white/10 mt-12 md:mt-16 pt-6 md:pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
           <p className="text-xs text-white/30 font-light tracking-wide">
             © {new Date().getFullYear()} Comfyville. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
-            <p className="text-xs text-white/30 font-light tracking-wide">
+            <p className="text-xs text-white/30 font-light tracking-wide hidden sm:block">
               Designed for those who demand the extraordinary.
             </p>
             <button

@@ -26,7 +26,7 @@ const Listings = () => {
     <main className="pt-20 md:pt-24">
       {/* Page header */}
       <section className="luxury-section-dark py-16 md:py-20">
-        <div className="container">
+        <div className="container px-5 md:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <p className="text-primary text-xs font-medium tracking-[0.3em] uppercase mb-3">
               Our Collection
@@ -41,7 +41,7 @@ const Listings = () => {
         </div>
       </section>
 
-      <section className="container py-10">
+      <section className="container px-5 md:px-8 py-8 md:py-10">
         {/* Filters */}
         <div className="flex flex-col md:flex-row gap-4 pb-8 border-b border-border">
           <div className="relative flex-1 max-w-md">

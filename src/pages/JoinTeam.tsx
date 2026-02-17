@@ -78,7 +78,7 @@ const JoinTeam = () => {
         <div className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-primary/8 rounded-full blur-[100px]" />
         <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent" />
 
-        <div className="container relative z-10 text-center px-4">
+        <div className="container px-5 md:px-8 relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -124,8 +124,8 @@ const JoinTeam = () => {
 
       {/* Stats ribbon */}
       <section className="border-y border-border/50 bg-background">
-        <div className="container py-12">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="container px-5 md:px-8 py-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
             {stats.map((stat, i) => (
               <motion.div
                 key={stat.label}
@@ -144,7 +144,7 @@ const JoinTeam = () => {
       </section>
 
       {/* Culture — staggered editorial layout */}
-      <section className="container py-24 md:py-32">
+      <section className="container px-5 md:px-8 py-16 md:py-32">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
             <p className="text-primary text-xs font-medium tracking-[0.3em] uppercase mb-4">Our Culture</p>
@@ -182,7 +182,7 @@ const JoinTeam = () => {
       {/* Open positions */}
       <section id="positions" className="luxury-section-dark py-24 md:py-32 relative">
         <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
-        <div className="container">
+        <div className="container px-5 md:px-8">
           <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-center mb-16">
             <p className="text-primary text-xs font-medium tracking-[0.3em] uppercase mb-3">Openings</p>
             <h2 className="font-display text-3xl md:text-5xl font-semibold text-white">
@@ -224,7 +224,7 @@ const JoinTeam = () => {
       </section>
 
       {/* Application form — editorial split */}
-      <section id="apply" className="container py-24 md:py-32">
+      <section id="apply" className="container px-5 md:px-8 py-16 md:py-32">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
             <p className="text-primary text-xs font-medium tracking-[0.3em] uppercase mb-4">Apply Now</p>

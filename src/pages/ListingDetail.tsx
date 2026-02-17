@@ -64,7 +64,7 @@ const ListingDetail = () => {
   return (
     <main className="pt-20 md:pt-24">
       {/* Gallery Hero */}
-      <section className="container py-8">
+      <section className="container px-5 md:px-8 py-6 md:py-8">
         <Link
           to="/listings"
           className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-6 tracking-wide uppercase"
@@ -96,7 +96,7 @@ const ListingDetail = () => {
         </motion.div>
       </section>
 
-      <section className="container pb-16">
+      <section className="container px-5 md:px-8 pb-12 md:pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Details */}
           <div className="lg:col-span-2 space-y-10">

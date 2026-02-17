@@ -117,7 +117,7 @@ const Dashboard = () => {
 
   return (
     <main className="pt-20 md:pt-24">
-      <section className="container py-6 md:py-8 space-y-6">
+      <section className="container px-5 md:px-8 py-6 md:py-8 space-y-6">
         {/* Enhanced Header */}
         <DashboardHeader
           user={user}

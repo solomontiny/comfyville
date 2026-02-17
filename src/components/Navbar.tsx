@@ -5,13 +5,16 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@/hooks/useAuth";
 import logo from "@/assets/logo.jpeg";
 
-const navLinks = [
+const primaryLinks = [
   { to: "/", label: "Home" },
   { to: "/listings", label: "Spaces" },
   { to: "/about", label: "About" },
-  { to: "/mission-vision", label: "Mission & Vision" },
   { to: "/contact", label: "Contact" },
-  { to: "/join-team", label: "Join Our Team" },
+];
+
+const moreLinks = [
+  { to: "/mission-vision", label: "Mission & Vision" },
+  { to: "/join-team", label: "Careers" },
 ];
 
 const serviceLinks = [
@@ -27,8 +30,10 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const servicesRef = useRef<HTMLDivElement>(null);
+  const moreRef = useRef<HTMLDivElement>(null);
   const { pathname } = useLocation();
   const { user, signOut } = useAuth();
 
@@ -43,6 +48,9 @@ const Navbar = () => {
       if (servicesRef.current && !servicesRef.current.contains(e.target as Node)) {
         setServicesOpen(false);
       }
+      if (moreRef.current && !moreRef.current.contains(e.target as Node)) {
+        setMoreOpen(false);
+      }
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
@@ -51,6 +59,12 @@ const Navbar = () => {
   const isHome = pathname === "/";
   const showDark = isHome && !scrolled;
   const isServiceActive = pathname.startsWith("/services");
+  const isMoreActive = moreLinks.some((l) => pathname === l.to);
+
+  const linkClass = (active: boolean) =>
+    `text-sm font-medium tracking-wide uppercase transition-colors duration-300 hover:text-primary ${
+      active ? "text-primary" : showDark ? "text-white/80" : "text-muted-foreground"
+    }`;
 
   return (
     <header
@@ -72,19 +86,9 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop */}
-        <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <Link
-              key={link.to}
-              to={link.to}
-              className={`text-sm font-medium tracking-wide uppercase transition-colors duration-300 hover:text-primary ${
-                pathname === link.to
-                  ? "text-primary"
-                  : showDark
-                  ? "text-white/80"
-                  : "text-muted-foreground"
-              }`}
-            >
+        <div className="hidden lg:flex items-center gap-6">
+          {primaryLinks.map((link) => (
+            <Link key={link.to} to={link.to} className={linkClass(pathname === link.to)}>
               {link.label}
             </Link>
           ))}
@@ -92,14 +96,8 @@ const Navbar = () => {
           {/* Services dropdown */}
           <div className="relative" ref={servicesRef}>
             <button
-              onClick={() => setServicesOpen(!servicesOpen)}
-              className={`text-sm font-medium tracking-wide uppercase transition-colors duration-300 hover:text-primary flex items-center gap-1 ${
-                isServiceActive
-                  ? "text-primary"
-                  : showDark
-                  ? "text-white/80"
-                  : "text-muted-foreground"
-              }`}
+              onClick={() => { setServicesOpen(!servicesOpen); setMoreOpen(false); }}
+              className={`${linkClass(isServiceActive)} flex items-center gap-1`}
             >
               Services <ChevronDown size={14} className={`transition-transform duration-200 ${servicesOpen ? "rotate-180" : ""}`} />
             </button>
@@ -138,21 +136,51 @@ const Navbar = () => {
             </AnimatePresence>
           </div>
 
+          {/* More dropdown */}
+          <div className="relative" ref={moreRef}>
+            <button
+              onClick={() => { setMoreOpen(!moreOpen); setServicesOpen(false); }}
+              className={`${linkClass(isMoreActive)} flex items-center gap-1`}
+            >
+              More <ChevronDown size={14} className={`transition-transform duration-200 ${moreOpen ? "rotate-180" : ""}`} />
+            </button>
+            <AnimatePresence>
+              {moreOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 8 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute top-full right-0 mt-3 w-56 bg-background border border-border rounded-lg shadow-xl overflow-hidden"
+                >
+                  {moreLinks.map((link) => (
+                    <Link
+                      key={link.to}
+                      to={link.to}
+                      onClick={() => setMoreOpen(false)}
+                      className={`block px-5 py-3 text-sm font-medium transition-colors hover:bg-primary/5 hover:text-primary border-b border-border/50 last:border-0 ${
+                        pathname === link.to ? "text-primary bg-primary/5" : "text-muted-foreground"
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
           {user ? (
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 ml-2">
               <Link
                 to="/dashboard"
-                className={`text-sm font-medium tracking-wide uppercase transition-colors duration-300 hover:text-primary flex items-center gap-1.5 ${
-                  pathname === "/dashboard" ? "text-primary" : showDark ? "text-white/80" : "text-muted-foreground"
-                }`}
+                className={`${linkClass(pathname === "/dashboard")} flex items-center gap-1.5`}
               >
                 <LayoutDashboard size={14} /> Dashboard
               </Link>
               <button
                 onClick={() => signOut()}
-                className={`text-sm font-medium tracking-wide uppercase transition-colors duration-300 hover:text-primary flex items-center gap-1.5 ${
-                  showDark ? "text-white/80" : "text-muted-foreground"
-                }`}
+                className={`${linkClass(false)} flex items-center gap-1.5`}
               >
                 <LogOut size={14} /> Sign Out
               </button>
@@ -164,13 +192,8 @@ const Navbar = () => {
               </Link>
             </div>
           ) : (
-            <div className="flex items-center gap-4">
-              <Link
-                to="/auth"
-                className={`text-sm font-medium tracking-wide uppercase transition-colors duration-300 hover:text-primary flex items-center gap-1.5 ${
-                  showDark ? "text-white/80" : "text-muted-foreground"
-                }`}
-              >
+            <div className="flex items-center gap-4 ml-2">
+              <Link to="/auth" className={`${linkClass(false)} flex items-center gap-1.5`}>
                 <LogIn size={14} /> Sign In
               </Link>
               <Link
@@ -186,7 +209,7 @@ const Navbar = () => {
         {/* Mobile toggle */}
         <button
           onClick={() => setOpen(!open)}
-          className={`md:hidden p-2 ${showDark ? "text-white" : "text-foreground"}`}
+          className={`lg:hidden p-2 ${showDark ? "text-white" : "text-foreground"}`}
         >
           {open ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -199,18 +222,16 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-background border-b border-border overflow-hidden"
+            className="lg:hidden bg-background border-b border-border overflow-hidden"
           >
             <div className="container py-4 flex flex-col">
-              {navLinks.map((link) => (
+              {primaryLinks.map((link) => (
                 <Link
                   key={link.to}
                   to={link.to}
                   onClick={() => setOpen(false)}
                   className={`text-sm font-medium tracking-wide uppercase py-3 px-2 rounded-lg transition-all duration-200 ${
-                    pathname === link.to
-                      ? "text-primary bg-primary/5"
-                      : "text-muted-foreground active:bg-muted"
+                    pathname === link.to ? "text-primary bg-primary/5" : "text-muted-foreground active:bg-muted"
                   }`}
                 >
                   {link.label}
@@ -259,6 +280,20 @@ const Navbar = () => {
                   </motion.div>
                 )}
               </AnimatePresence>
+
+              {/* More links in mobile */}
+              {moreLinks.map((link) => (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  onClick={() => setOpen(false)}
+                  className={`text-sm font-medium tracking-wide uppercase py-3 px-2 rounded-lg transition-all duration-200 ${
+                    pathname === link.to ? "text-primary bg-primary/5" : "text-muted-foreground active:bg-muted"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
 
               <div className="border-t border-border/50 mt-2 pt-2">
                 {user ? (

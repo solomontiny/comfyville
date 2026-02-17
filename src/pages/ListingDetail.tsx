@@ -8,6 +8,7 @@ import { addDays, isBefore, startOfDay } from "date-fns";
 import { toast } from "sonner";
 import AppointmentModal from "@/components/AppointmentModal";
 import { useFavorites } from "@/hooks/useFavorites";
+import ProductRating from "@/components/ProductRating";
 
 const ADMIN_WHATSAPP = "09037098493";
 
@@ -154,6 +155,16 @@ const ListingDetail = () => {
                 <CalendarDays size={16} />
                 Schedule Viewing
               </button>
+            </div>
+
+            {/* Product Rating */}
+            <div className="luxury-card p-6">
+              <ProductRating
+                listingId={listing.id}
+                listingTitle={listing.title}
+                currentRating={listing.rating}
+                totalReviews={listing.reviews}
+              />
             </div>
           </div>
 

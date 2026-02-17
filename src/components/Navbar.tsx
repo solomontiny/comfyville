@@ -11,6 +11,7 @@ const navLinks = [
   { to: "/about", label: "About" },
   { to: "/mission-vision", label: "Mission & Vision" },
   { to: "/contact", label: "Contact" },
+  { to: "/join-team", label: "Join Our Team" },
 ];
 
 const serviceLinks = [

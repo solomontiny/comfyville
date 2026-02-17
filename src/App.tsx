@@ -24,6 +24,7 @@ import PropertyManagement from "./pages/services/PropertyManagement";
 import LandInvestment from "./pages/services/LandInvestment";
 import LuxuryInterior from "./pages/services/LuxuryInterior";
 import InvestorGuidance from "./pages/services/InvestorGuidance";
+import JoinTeam from "./pages/JoinTeam";
 
 const queryClient = new QueryClient();
 
@@ -51,6 +52,7 @@ const App = () => (
             <Route path="/services/land-investment" element={<LandInvestment />} />
             <Route path="/services/luxury-interior" element={<LuxuryInterior />} />
             <Route path="/services/investor-guidance" element={<InvestorGuidance />} />
+            <Route path="/join-team" element={<JoinTeam />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />

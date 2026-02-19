@@ -89,7 +89,7 @@ const ListingDetail = () => {
                   i === selectedImage ? "border-primary" : "border-transparent hover:border-primary/30"
                 }`}
               >
-                <img src={img} alt="" className="w-full h-full object-cover aspect-[4/3] md:aspect-auto" />
+                <img src={img} alt="" className="w-full h-full object-cover aspect-[4/3] md:aspect-auto" loading="lazy" />
               </button>
             ))}
           </div>

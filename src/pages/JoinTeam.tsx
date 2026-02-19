@@ -196,6 +196,7 @@ const JoinTeam = () => {
                 src={careersCulture}
                 alt="Our luxury workspace"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
               <div className="absolute bottom-4 left-4 right-4">

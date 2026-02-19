@@ -14,6 +14,7 @@ const primaryLinks = [
 
 const moreLinks = [
   { to: "/mission-vision", label: "Mission & Vision" },
+  { to: "/our-team", label: "Our Team" },
   { to: "/join-team", label: "Careers" },
 ];
 

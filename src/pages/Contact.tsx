@@ -98,9 +98,9 @@ const Contact = () => {
             </div>
 
             {[
-              { icon: Mail, label: "Email", value: "hello@comfyville.com", href: "mailto:hello@comfyville.com" },
-              { icon: Phone, label: "Phone", value: "+1 (234) 567-890", href: "tel:+1234567890" },
-              { icon: MessageCircle, label: "WhatsApp", value: "Chat with us", href: "https://wa.me/1234567890" },
+              { icon: Mail, label: "Email", value: "Villecomfy@gmail.com", href: "mailto:Villecomfy@gmail.com" },
+              { icon: Phone, label: "Phone", value: "+234 903 709 8493", href: "tel:+2349037098493" },
+              { icon: MessageCircle, label: "WhatsApp", value: "Chat with us", href: "https://wa.me/2349037098493" },
               { icon: MapPin, label: "Location", value: "Global — We operate worldwide", href: undefined },
             ].map(({ icon: Icon, label, value, href }) => (
               <div key={label} className="flex items-start gap-4">
@@ -124,6 +124,30 @@ const Contact = () => {
                 </div>
               </div>
             ))}
+
+            {/* Follow Comfyville */}
+            <div className="pt-4">
+              <p className="text-primary text-xs font-medium tracking-[0.3em] uppercase mb-4">Follow Us</p>
+              <div className="flex flex-wrap gap-3">
+                {[
+                  { label: "Snapchat", href: "https://www.snapchat.com/add/comfyville?share_id=zrj8leHxDhM&locale=en-US" },
+                  { label: "Instagram", href: "https://www.instagram.com/comfyville?igsh=MXYxa21tczdndXh2Mw==" },
+                  { label: "Facebook", href: "https://www.facebook.com/share/r/17SnNd4brB/" },
+                  { label: "TikTok", href: "https://www.tiktok.com/@comfyvillle?_r=1&_t=ZS-943PWpSoHhI" },
+                  { label: "X (Twitter)", href: "#" },
+                ].map(({ label, href }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-2 rounded-full border border-border text-xs font-medium text-foreground hover:border-primary hover:text-primary transition-all duration-300"
+                  >
+                    {label}
+                  </a>
+                ))}
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>

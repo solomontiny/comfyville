@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Instagram, Mail, Phone, MessageCircle, ArrowUp } from "lucide-react";
+import { Instagram, Mail, Phone, MessageCircle, ArrowUp, Facebook } from "lucide-react";
 import logo from "@/assets/logo.jpeg";
 
 const ADMIN_WHATSAPP = "2349037098493";
@@ -109,21 +109,44 @@ const Footer = () => {
 
           <div className="col-span-2 md:col-span-1">
             <h4 className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 md:mb-6">Connect</h4>
-            <div className="flex gap-3">
+            <div className="flex gap-3 flex-wrap">
               {[
-                { icon: Instagram, href: "#" },
-                { icon: MessageCircle, href: `https://wa.me/${ADMIN_WHATSAPP}` },
-                { icon: Mail, href: `mailto:${ADMIN_EMAIL}` },
-                { icon: Phone, href: `tel:${ADMIN_PHONE}` },
-              ].map(({ icon: Icon, href }, i) => (
+                { icon: Instagram, href: "https://www.instagram.com/comfyville?igsh=MXYxa21tczdndXh2Mw==", label: "Instagram" },
+                { icon: Facebook, href: "https://www.facebook.com/share/r/17SnNd4brB/", label: "Facebook" },
+                { icon: MessageCircle, href: `https://wa.me/${ADMIN_WHATSAPP}`, label: "WhatsApp" },
+                { icon: Mail, href: `mailto:${ADMIN_EMAIL}`, label: "Email" },
+                { icon: Phone, href: `tel:${ADMIN_PHONE}`, label: "Phone" },
+              ].map(({ icon: Icon, href, label }, i) => (
                 <a
                   key={i}
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={label}
                   className="w-11 h-11 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:border-primary hover:text-primary transition-all duration-300"
                 >
                   <Icon size={16} />
+                </a>
+              ))}
+            </div>
+
+            <h4 className="text-xs font-medium tracking-[0.2em] uppercase text-primary mt-6 mb-3">Follow Comfyville</h4>
+            <div className="flex flex-col gap-2">
+              {[
+                { label: "Snapchat", href: "https://www.snapchat.com/add/comfyville?share_id=zrj8leHxDhM&locale=en-US" },
+                { label: "Instagram", href: "https://www.instagram.com/comfyville?igsh=MXYxa21tczdndXh2Mw==" },
+                { label: "Facebook", href: "https://www.facebook.com/share/r/17SnNd4brB/" },
+                { label: "TikTok", href: "https://www.tiktok.com/@comfyvillle?_r=1&_t=ZS-943PWpSoHhI" },
+                { label: "X (Twitter)", href: "#" },
+              ].map(({ label, href }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-white/50 hover:text-primary transition-colors duration-300 font-light"
+                >
+                  {label}
                 </a>
               ))}
             </div>

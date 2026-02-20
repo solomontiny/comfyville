@@ -55,12 +55,12 @@ const Listings = () => {
             />
           </div>
 
-          <div className="flex flex-wrap gap-2 items-center">
+          <div className="flex flex-wrap gap-1.5 sm:gap-2 items-center">
             {types.map((t) => (
               <button
                 key={t}
                 onClick={() => setType(t)}
-                className={`px-4 py-2.5 rounded text-xs font-medium capitalize tracking-wide transition-all duration-300 ${
+                className={`px-3 sm:px-4 py-2 sm:py-2.5 rounded text-[11px] sm:text-xs font-medium capitalize tracking-wide transition-all duration-300 ${
                   type === t
                     ? "bg-primary text-primary-foreground"
                     : "bg-muted text-muted-foreground hover:text-foreground"

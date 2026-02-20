@@ -63,7 +63,7 @@ const values = [
 const OurTeam = () => (
   <main className="pt-20 md:pt-24">
     {/* Hero */}
-    <section className="relative h-[65vh] min-h-[480px] flex items-end overflow-hidden">
+    <section className="relative h-[55vh] sm:h-[65vh] min-h-[380px] sm:min-h-[480px] flex items-end overflow-hidden">
       <motion.img
         src={teamHero}
         alt="The Comfyville team"
@@ -78,7 +78,7 @@ const OurTeam = () => (
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
           <motion.div initial={{ width: 0 }} animate={{ width: 60 }} transition={{ duration: 0.8, delay: 0.3 }} className="h-[1px] bg-primary mb-6" />
           <p className="text-white/50 text-xs tracking-[0.3em] uppercase mb-3">Our People</p>
-          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white max-w-3xl leading-tight">
+          <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white max-w-3xl leading-tight">
             The Minds Behind{" "}
             <span className="italic font-light gold-gradient-text">Comfyville</span>
           </h1>
@@ -131,7 +131,7 @@ const OurTeam = () => (
               {/* Placeholder avatar */}
               <div className="aspect-[3/4] bg-gradient-to-br from-primary/20 via-primary/5 to-transparent flex items-center justify-center relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                <span className="font-display text-5xl md:text-6xl font-bold gold-gradient-text opacity-60 group-hover:opacity-100 transition-opacity duration-500">
+                <span className="font-display text-4xl sm:text-5xl md:text-6xl font-bold gold-gradient-text opacity-60 group-hover:opacity-100 transition-opacity duration-500">
                   {member.initials}
                 </span>
                 {/* Hover overlay with links */}

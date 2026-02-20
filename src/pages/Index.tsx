@@ -13,7 +13,7 @@ const Index = () => {
   return (
     <main>
       {/* Hero — Full viewport, dramatic overlay */}
-      <section className="relative h-screen min-h-[700px] flex items-center overflow-hidden">
+      <section className="relative h-[100svh] min-h-[600px] flex items-center overflow-hidden">
         <img
           src={heroImage}
           alt="Luxury living space"
@@ -40,7 +40,7 @@ const Index = () => {
             <p className="text-white/60 text-xs font-medium tracking-[0.35em] uppercase mb-6">
               Premium Short-Stays & Investments
             </p>
-            <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-[0.95]">
+            <h1 className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-[0.95]">
               Your Money's{" "}
               <span className="italic font-light gold-gradient-text">Worth</span>
             </h1>
@@ -186,7 +186,7 @@ const Index = () => {
                 <Star key={i} size={18} className="text-primary fill-primary" />
               ))}
             </div>
-            <blockquote className="font-display text-2xl md:text-3xl lg:text-4xl italic text-foreground leading-relaxed font-light">
+            <blockquote className="font-display text-xl sm:text-2xl md:text-3xl lg:text-4xl italic text-foreground leading-relaxed font-light">
               "Comfyville exceeded every expectation. The space was immaculate, the views breathtaking, and the booking process seamless."
             </blockquote>
             <div className="luxury-divider mx-auto my-6" />

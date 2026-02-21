@@ -8,6 +8,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import ChatBot from "@/components/ChatBot";
+import ScrollToTop from "@/components/ScrollToTop";
 import Index from "./pages/Index";
 import Listings from "./pages/Listings";
 import ListingDetail from "./pages/ListingDetail";
@@ -36,6 +37,7 @@ const App = () => (
       <Sonner />
       <HashRouter>
         <AuthProvider>
+          <ScrollToTop />
           <Navbar />
           <Routes>
             <Route path="/" element={<Index />} />

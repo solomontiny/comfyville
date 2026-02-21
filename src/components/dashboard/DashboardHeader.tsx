@@ -1,7 +1,8 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { User } from "@supabase/supabase-js";
-import { Bell, Camera, Clock, CalendarDays, X, Loader2 } from "lucide-react";
+import { Bell, Camera, Clock, CalendarDays, X, Loader2, ZoomIn } from "lucide-react";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { format } from "date-fns";
 import { Notification } from "@/hooks/useNotifications";
 import { supabase } from "@/integrations/supabase/client";
@@ -37,6 +38,7 @@ const getInitials = (user: User) => {
 const DashboardHeader = ({ user, notifications, unreadCount, markAsRead, markAllAsRead, lastSignIn, avatarUrl, onAvatarUpdate }: DashboardHeaderProps) => {
   const [showNotifs, setShowNotifs] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const [showAvatarZoom, setShowAvatarZoom] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const displayName = user.user_metadata?.display_name || user.email?.split("@")[0] || "User";
 
@@ -105,15 +107,24 @@ const DashboardHeader = ({ user, notifications, unreadCount, markAsRead, markAll
         {/* Left: Avatar + Greeting */}
         <div className="flex items-center gap-3 sm:gap-4 md:gap-5 min-w-0">
           <div className="relative shrink-0">
-            <div className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-2xl bg-gradient-to-br from-primary/30 to-primary/10 border-2 border-primary/30 flex items-center justify-center overflow-hidden">
+            <button
+              type="button"
+              onClick={() => avatarUrl && setShowAvatarZoom(true)}
+              className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-2xl bg-gradient-to-br from-primary/30 to-primary/10 border-2 border-primary/30 flex items-center justify-center overflow-hidden cursor-pointer group relative"
+            >
               {avatarUrl ? (
-                <img src={avatarUrl} alt="Profile" className="w-full h-full object-cover" />
+                <>
+                  <img src={avatarUrl} alt="Profile" className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <ZoomIn size={16} className="text-white" />
+                  </div>
+                </>
               ) : (
                 <span className="gold-gradient-text text-lg sm:text-xl md:text-2xl font-display font-bold">
                   {getInitials(user)}
                 </span>
               )}
-            </div>
+            </button>
             <input
               ref={fileInputRef}
               type="file"
@@ -220,6 +231,18 @@ const DashboardHeader = ({ user, notifications, unreadCount, markAsRead, markAll
           </motion.div>
         )}
       </AnimatePresence>
+      {/* Avatar Zoom Dialog */}
+      <Dialog open={showAvatarZoom} onOpenChange={setShowAvatarZoom}>
+        <DialogContent className="max-w-sm sm:max-w-md p-2 bg-card border-border">
+          {avatarUrl && (
+            <img
+              src={avatarUrl}
+              alt="Profile picture"
+              className="w-full h-auto rounded-xl object-contain max-h-[80vh]"
+            />
+          )}
+        </DialogContent>
+      </Dialog>
     </motion.div>
   );
 };

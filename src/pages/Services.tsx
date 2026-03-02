@@ -39,8 +39,8 @@ const services = [
   },
   {
     icon: Palette,
-    title: "Luxury Interior & Design",
-    description: "Transform spaces into masterpieces with bespoke design, premium materials, and expert craftsmanship.",
+    title: "Luxury Interiors & 3D Visualizations",
+    description: "Transform spaces with bespoke design, 3D interior & exterior renders, and expert craftsmanship.",
     image: serviceInterior,
     link: "/services/luxury-interior",
   },

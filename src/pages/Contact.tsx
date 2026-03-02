@@ -98,7 +98,7 @@ const Contact = () => {
             </div>
 
             {[
-              { icon: Mail, label: "Email", value: "Villecomfy@gmail.com", href: "mailto:Villecomfy@gmail.com" },
+              { icon: Mail, label: "Email", value: "info@bookcomfyville.com", href: "mailto:info@bookcomfyville.com" },
               { icon: Phone, label: "Phone", value: "+234 903 709 8493", href: "tel:+2349037098493" },
               { icon: MessageCircle, label: "WhatsApp", value: "Chat with us", href: "https://wa.me/2349037098493" },
               { icon: MapPin, label: "Location", value: "Global — We operate worldwide", href: undefined },

@@ -9,19 +9,88 @@ type Message = { role: "user" | "assistant"; content: string };
 
 const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/chat`;
 
+const ChatBotHeader = ({ onClose }: { onClose: () => void }) => (
+  <div className="bg-primary px-4 py-3 flex items-center justify-between flex-shrink-0">
+    <div className="flex items-center gap-2">
+      <Bot size={18} className="text-primary-foreground" />
+      <div>
+        <p className="text-primary-foreground text-sm font-medium">Comfyville AI</p>
+        <p className="text-primary-foreground/60 text-[10px]">Luxury Concierge</p>
+      </div>
+    </div>
+    <button
+      onClick={onClose}
+      className="w-8 h-8 rounded-full bg-primary-foreground/10 flex items-center justify-center text-primary-foreground hover:bg-primary-foreground/20 transition-colors"
+    >
+      <X size={14} />
+    </button>
+  </div>
+);
+
+const ChatMessage = ({ msg, isLast, streaming }: { msg: Message; isLast: boolean; streaming: boolean }) => (
+  <div className={`flex gap-2 ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
+    {msg.role === "assistant" && (
+      <div className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+        <Bot size={14} className="text-primary" />
+      </div>
+    )}
+    <div
+      className={`max-w-[75%] px-3 py-2 rounded-lg text-sm font-light leading-relaxed ${
+        msg.role === "user"
+          ? "bg-primary text-primary-foreground rounded-br-sm"
+          : "bg-muted text-foreground rounded-bl-sm"
+      }`}
+    >
+      {msg.content || (streaming && isLast && <Loader2 size={14} className="animate-spin text-muted-foreground" />)}
+    </div>
+    {msg.role === "user" && (
+      <div className="w-7 h-7 rounded-full bg-muted flex items-center justify-center flex-shrink-0 mt-0.5">
+        <User size={14} className="text-muted-foreground" />
+      </div>
+    )}
+  </div>
+);
+
 const ChatBot = () => {
-  const { user, session } = useAuth();
+  const { user } = useAuth();
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     { role: "assistant", content: "Welcome to Comfyville! 🏡 I'm your luxury concierge. How can I help you find the perfect space today?" },
   ]);
   const [input, setInput] = useState("");
   const [streaming, setStreaming] = useState(false);
+  const [chatLogId, setChatLogId] = useState<string | null>(null);
   const endRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, open]);
+
+  // Save chat log to DB
+  const saveChatLog = useCallback(async (msgs: Message[]) => {
+    if (!user) return;
+    try {
+      if (chatLogId) {
+        await supabase
+          .from("chat_logs")
+          .update({ messages: msgs as any })
+          .eq("id", chatLogId);
+      } else {
+        const { data } = await supabase
+          .from("chat_logs")
+          .insert({
+            user_id: user.id,
+            user_email: user.email,
+            messages: msgs as any,
+          })
+          .select("id")
+          .single();
+        if (data) setChatLogId(data.id);
+      }
+    } catch {
+      // Silently fail — chat logging is non-critical
+    }
+  }, [user, chatLogId]);
 
   const sendMessage = useCallback(async () => {
     const text = input.trim();
@@ -33,16 +102,14 @@ const ChatBot = () => {
     setInput("");
     setStreaming(true);
 
-    // Add empty assistant message for streaming
     setMessages((prev) => [...prev, { role: "assistant", content: "" }]);
 
+    let finalMessages = updated;
+
     try {
-      // Get fresh access token
       const { data: sessionData } = await supabase.auth.getSession();
       const accessToken = sessionData?.session?.access_token;
-      if (!accessToken) {
-        throw new Error("Please sign in to use the chat.");
-      }
+      if (!accessToken) throw new Error("Please sign in to use the chat.");
 
       const resp = await fetch(CHAT_URL, {
         method: "POST",
@@ -61,6 +128,7 @@ const ChatBot = () => {
       const reader = resp.body.getReader();
       const decoder = new TextDecoder();
       let textBuffer = "";
+      let assistantContent = "";
 
       while (true) {
         const { done, value } = await reader.read();
@@ -76,35 +144,34 @@ const ChatBot = () => {
             const json = JSON.parse(line.slice(6));
             const delta = json.choices?.[0]?.delta?.content;
             if (delta) {
+              assistantContent += delta;
               setMessages((prev) => {
                 const copy = [...prev];
-                copy[copy.length - 1] = {
-                  ...copy[copy.length - 1],
-                  content: copy[copy.length - 1].content + delta,
-                };
+                copy[copy.length - 1] = { ...copy[copy.length - 1], content: assistantContent };
                 return copy;
               });
             }
-          } catch { /* ignore partial JSON */ }
+          } catch { /* ignore */ }
         }
       }
+
+      finalMessages = [...updated, { role: "assistant" as const, content: assistantContent }];
     } catch (err: any) {
+      const errContent = err.message || "Sorry, something went wrong. Please try again or contact us on WhatsApp.";
+      finalMessages = [...updated, { role: "assistant" as const, content: errContent }];
       setMessages((prev) => {
         const copy = [...prev];
-        copy[copy.length - 1] = {
-          role: "assistant",
-          content: err.message || "Sorry, something went wrong. Please try again or contact us on WhatsApp.",
-        };
+        copy[copy.length - 1] = { role: "assistant", content: errContent };
         return copy;
       });
     } finally {
       setStreaming(false);
+      saveChatLog(finalMessages);
     }
-  }, [input, messages, streaming]);
+  }, [input, messages, streaming, saveChatLog]);
 
   return (
     <>
-      {/* Toggle button */}
       <AnimatePresence>
         {!open && (
           <motion.button
@@ -123,7 +190,6 @@ const ChatBot = () => {
         )}
       </AnimatePresence>
 
-      {/* Chat window */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -133,54 +199,15 @@ const ChatBot = () => {
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
             className="fixed bottom-4 left-4 md:bottom-8 md:left-8 z-50 w-[calc(100vw-2rem)] md:w-[380px] h-[500px] bg-card border border-border rounded-lg shadow-2xl flex flex-col overflow-hidden"
           >
-            {/* Header */}
-            <div className="bg-primary px-4 py-3 flex items-center justify-between flex-shrink-0">
-              <div className="flex items-center gap-2">
-                <Bot size={18} className="text-primary-foreground" />
-                <div>
-                  <p className="text-primary-foreground text-sm font-medium">Comfyville AI</p>
-                  <p className="text-primary-foreground/60 text-[10px]">Luxury Concierge</p>
-                </div>
-              </div>
-              <button
-                onClick={() => setOpen(false)}
-                className="w-8 h-8 rounded-full bg-primary-foreground/10 flex items-center justify-center text-primary-foreground hover:bg-primary-foreground/20 transition-colors"
-              >
-                <X size={14} />
-              </button>
-            </div>
+            <ChatBotHeader onClose={() => setOpen(false)} />
 
-            {/* Messages */}
             <div className="flex-1 overflow-y-auto p-4 space-y-3">
               {messages.map((msg, i) => (
-                <div key={i} className={`flex gap-2 ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
-                  {msg.role === "assistant" && (
-                    <div className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <Bot size={14} className="text-primary" />
-                    </div>
-                  )}
-                  <div
-                    className={`max-w-[75%] px-3 py-2 rounded-lg text-sm font-light leading-relaxed ${
-                      msg.role === "user"
-                        ? "bg-primary text-primary-foreground rounded-br-sm"
-                        : "bg-muted text-foreground rounded-bl-sm"
-                    }`}
-                  >
-                    {msg.content || (streaming && i === messages.length - 1 && (
-                      <Loader2 size={14} className="animate-spin text-muted-foreground" />
-                    ))}
-                  </div>
-                  {msg.role === "user" && (
-                    <div className="w-7 h-7 rounded-full bg-muted flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <User size={14} className="text-muted-foreground" />
-                    </div>
-                  )}
-                </div>
+                <ChatMessage key={i} msg={msg} isLast={i === messages.length - 1} streaming={streaming} />
               ))}
               <div ref={endRef} />
             </div>
 
-            {/* Input */}
             <div className="border-t border-border p-3 flex-shrink-0">
               {user ? (
                 <div className="flex gap-2">
@@ -206,8 +233,7 @@ const ChatBot = () => {
                   to="/auth"
                   className="flex items-center justify-center gap-2 w-full py-2.5 rounded bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors"
                 >
-                  <LogIn size={14} />
-                  Sign in to chat
+                  <LogIn size={14} /> Sign in to chat
                 </Link>
               )}
             </div>

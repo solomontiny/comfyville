@@ -23,7 +23,7 @@ const serviceLinks = [
   { to: "/services/short-term-apartments", label: "Short-term & Serviced Apartments" },
   { to: "/services/property-management", label: "Property Management & Facility Care" },
   { to: "/services/land-investment", label: "Land & Investment Advisory" },
-  { to: "/services/luxury-interior", label: "Luxury Interior & Design Support" },
+  { to: "/services/luxury-interior", label: "Luxury Interiors & 3D Visualizations" },
   { to: "/services/investor-guidance", label: "Guidance for Investors & First-Time Buyers" },
 ];
 

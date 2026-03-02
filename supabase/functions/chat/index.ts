@@ -100,7 +100,7 @@ Available properties:
 5. Designer City Loft - Shoreditch, London - $275/night - 2 beds, 4 guests
 6. Lakeside Modern House - Lake Como, Italy - $520/night - 3 beds, 6 guests (currently unavailable)
 
-Contact: WhatsApp 09037098493, Email: Villecomfy@gmail.com
+Contact: WhatsApp 09037098493, Email: info@bookcomfyville.com
 For appointments: users can schedule viewings through the website or contact via WhatsApp.
 
 Keep responses concise (2-4 sentences max). Use a warm, luxury tone. If asked something outside your scope, politely redirect to contacting support.`,

@@ -10,7 +10,7 @@ const TikTokIcon = ({ size = 16 }: { size?: number }) => (
 import logo from "@/assets/logo.jpeg";
 
 const ADMIN_WHATSAPP = "2349037098493";
-const ADMIN_EMAIL = "Villecomfy@gmail.com";
+const ADMIN_EMAIL = "info@bookcomfyville.com";
 const ADMIN_PHONE = "+2349037098493";
 
 const Footer = () => {
@@ -86,7 +86,7 @@ const Footer = () => {
                 { to: "/services/short-term-apartments", label: "Short-term Apartments" },
                 { to: "/services/property-management", label: "Property Management" },
                 { to: "/services/land-investment", label: "Land & Investment" },
-                { to: "/services/luxury-interior", label: "Luxury Interior" },
+                { to: "/services/luxury-interior", label: "Interior & 3D Visuals" },
                 { to: "/services/investor-guidance", label: "Investor Guidance" },
               ].map((l) => (
                 <Link

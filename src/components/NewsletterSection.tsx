@@ -1,16 +1,37 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 const NewsletterSection = () => {
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
-      toast.success("You're on the list! New listings, delivered first.");
+    if (!email) return;
+
+    setLoading(true);
+    try {
+      const { error } = await supabase
+        .from("newsletter_subscribers")
+        .insert({ email: email.trim().toLowerCase() });
+
+      if (error) {
+        if (error.code === "23505") {
+          toast.info("You're already subscribed!");
+        } else {
+          throw error;
+        }
+      } else {
+        toast.success("You're on the list! New listings, delivered first.");
+      }
       setEmail("");
+    } catch {
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -38,13 +59,15 @@ const NewsletterSection = () => {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="your@email.com"
               required
-              className="flex-1 px-5 py-3.5 rounded bg-white/5 border border-white/10 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-primary transition-colors font-light"
+              disabled={loading}
+              className="flex-1 px-5 py-3.5 rounded bg-white/5 border border-white/10 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-primary transition-colors font-light disabled:opacity-50"
             />
             <button
               type="submit"
-              className="bg-primary text-primary-foreground px-6 py-3.5 rounded text-sm font-medium hover:bg-primary/90 transition-all duration-300 inline-flex items-center gap-2 tracking-wide"
+              disabled={loading}
+              className="bg-primary text-primary-foreground px-6 py-3.5 rounded text-sm font-medium hover:bg-primary/90 transition-all duration-300 inline-flex items-center justify-center gap-2 tracking-wide disabled:opacity-50"
             >
-              Subscribe <ArrowRight size={14} />
+              {loading ? <Loader2 size={14} className="animate-spin" /> : <>Subscribe <ArrowRight size={14} /></>}
             </button>
           </form>
         </motion.div>

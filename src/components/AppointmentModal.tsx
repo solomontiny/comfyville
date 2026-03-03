@@ -92,6 +92,22 @@ const AppointmentModal = ({
     const whatsappUrl = `https://wa.me/${adminNumber}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, "_blank");
 
+    // Send email notification to admin
+    try {
+      await supabase.functions.invoke("send-appointment-email", {
+        body: {
+          name,
+          phone: phone || null,
+          date: formattedDate,
+          time,
+          listingTitle,
+        },
+      });
+    } catch (emailErr) {
+      console.error("Email notification failed:", emailErr);
+      // Don't block the flow if email fails
+    }
+
     toast.success("Appointment booked! Redirecting to WhatsApp to confirm.");
     setSaving(false);
     onClose();

@@ -3,9 +3,9 @@ import ServicePageLayout from "@/components/ServicePageLayout";
 import fallbackImage from "@/assets/service-sales.jpg";
 import { useServiceImage } from "@/hooks/useServiceImages";
 
-const PropertySalesRentals = () => (
-  <ServicePageLayout
-    heroImage={heroImage}
+const PropertySalesRentals = () => {
+  const heroImage = useServiceImage("property-sales-rentals", fallbackImage);
+  return (
     heroLabel="Our Services"
     heroTitle="Property Sales & Rentals"
     heroSubtitle="Premium real estate transactions powered by expertise, trust, and an unwavering commitment to your satisfaction."

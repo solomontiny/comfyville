@@ -67,6 +67,7 @@ const Services = () => {
   const { images } = useAllServiceImages();
 
 const Services = () => (
+  return (
   <main className="pt-20 md:pt-24">
     {/* Hero */}
     <section className="luxury-section-dark py-24 md:py-32 relative overflow-hidden">

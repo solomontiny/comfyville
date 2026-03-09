@@ -1,8 +1,11 @@
 import { Palette, Sofa, Lamp, Ruler, Gem, PaintBucket, Box, Eye, Monitor } from "lucide-react";
 import ServicePageLayout from "@/components/ServicePageLayout";
-import heroImage from "@/assets/service-interior.jpg";
+import fallbackImage from "@/assets/service-interior.jpg";
+import { useServiceImage } from "@/hooks/useServiceImages";
 
-const LuxuryInterior = () => (
+const LuxuryInterior = () => {
+  const heroImage = useServiceImage("luxury-interior", fallbackImage);
+  return (
   <ServicePageLayout
     heroImage={heroImage}
     heroLabel="Our Services"

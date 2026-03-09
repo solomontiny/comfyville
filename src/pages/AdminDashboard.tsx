@@ -51,7 +51,7 @@ const AdminDashboard = () => {
   const { user, loading: authLoading } = useAuth();
   const navigate = useNavigate();
   const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
-  const [activeTab, setActiveTab] = useState<"appointments" | "subscribers" | "chats" | "listings">("appointments");
+  const [activeTab, setActiveTab] = useState<"appointments" | "subscribers" | "chats" | "images">("appointments");
   const [appointments, setAppointments] = useState<AdminAppointment[]>([]);
   const [subscribers, setSubscribers] = useState<Subscriber[]>([]);
   const [chatLogs, setChatLogs] = useState<ChatLog[]>([]);

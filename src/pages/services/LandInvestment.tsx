@@ -1,8 +1,11 @@
 import { Landmark, TrendingUp, FileText, MapPin, Scale, Lightbulb } from "lucide-react";
 import ServicePageLayout from "@/components/ServicePageLayout";
-import heroImage from "@/assets/service-land.jpg";
+import fallbackImage from "@/assets/service-land.jpg";
+import { useServiceImage } from "@/hooks/useServiceImages";
 
-const LandInvestment = () => (
+const LandInvestment = () => {
+  const heroImage = useServiceImage("land-investment", fallbackImage);
+  return (
   <ServicePageLayout
     heroImage={heroImage}
     heroLabel="Our Services"

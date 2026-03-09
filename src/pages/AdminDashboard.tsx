@@ -386,22 +386,10 @@ const AdminDashboard = () => {
               </motion.div>
             )}
 
-            {/* Listings Tab */}
-            {activeTab === "listings" && (
+            {/* Service Images Tab */}
+            {activeTab === "images" && (
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-                <div className="luxury-card p-8 text-center">
-                  <Eye size={36} className="mx-auto text-muted-foreground mb-4" />
-                  <h3 className="font-display text-lg font-semibold text-foreground mb-2">Listings Management</h3>
-                  <p className="text-sm text-muted-foreground font-light mb-4">
-                    Listings are currently managed through the codebase. Database-driven listings management coming soon.
-                  </p>
-                  <Link
-                    to="/listings"
-                    className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded text-sm font-medium tracking-wide uppercase hover:bg-primary/90 transition-all duration-300"
-                  >
-                    View Current Listings <ArrowRight size={14} />
-                  </Link>
-                </div>
+                <ServiceImageManager />
               </motion.div>
             )}
           </>

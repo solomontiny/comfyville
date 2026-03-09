@@ -66,7 +66,8 @@ const serviceData = [
 const Services = () => {
   const { images } = useAllServiceImages();
 
-const Services = () => (
+const Services = () => {
+  const { images } = useAllServiceImages();
   return (
   <main className="pt-20 md:pt-24">
     {/* Hero */}

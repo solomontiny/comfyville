@@ -112,7 +112,7 @@ const ServicePageLayout = ({
       <section className="container px-4 sm:px-5 md:px-8 py-12 sm:py-16 md:py-24 max-w-4xl">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
           <p className="text-primary text-xs font-medium tracking-[0.3em] uppercase mb-3">{introLabel}</p>
-          <h2 className="font-display text-3xl md:text-4xl font-semibold text-foreground mb-6">{introTitle}</h2>
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-foreground mb-4 sm:mb-6">{introTitle}</h2>
           <div className="luxury-divider mb-8" />
           <p className="text-muted-foreground leading-relaxed text-lg font-light">{introText}</p>
           {introText2 && <p className="text-muted-foreground leading-relaxed text-lg font-light mt-4">{introText2}</p>}

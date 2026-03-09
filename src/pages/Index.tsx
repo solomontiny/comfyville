@@ -40,7 +40,7 @@ const Index = () => {
             <p className="text-white/60 text-xs font-medium tracking-[0.35em] uppercase mb-6">
               Premium Short-Stays & Investments
             </p>
-            <h1 className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-[0.95]">
+            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-bold text-white leading-[0.95]">
               Your Money's{" "}
               <span className="italic font-light gold-gradient-text">Worth</span>
             </h1>

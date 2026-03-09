@@ -96,8 +96,8 @@ const ListingDetail = () => {
         </motion.div>
       </section>
 
-      <section className="container px-5 md:px-8 pb-12 md:pb-16">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+      <section className="container px-4 sm:px-5 md:px-8 pb-8 sm:pb-12 md:pb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
           {/* Details */}
           <div className="lg:col-span-2 space-y-10">
             <div>

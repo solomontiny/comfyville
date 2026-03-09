@@ -64,7 +64,7 @@ const ListingDetail = () => {
   return (
     <main className="pt-20 md:pt-24">
       {/* Gallery Hero */}
-      <section className="container px-4 sm:px-5 md:px-8 py-4 sm:py-6 md:py-8">
+      <section className="container px-4 sm:px-5 md:px-8 py-4 sm:md:px-8 py-4 sm:py-6 md:py-8">
         <Link
           to="/listings"
           className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-6 tracking-wide uppercase"
@@ -72,7 +72,7 @@ const ListingDetail = () => {
           <ArrowLeft size={14} /> All Spaces
         </Link>
 
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="grid grid-cols-1 md:grid-cols-3 gap-3">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="gsm:grid-cols-3 gap-2 sm: md:grid-cols-3 gap-3">
           <div className="md:col-span-2 aspect-[16/10] rounded-lg overflow-hidden">
             <img
               src={listing.images[selectedImage]}

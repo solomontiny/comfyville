@@ -108,7 +108,7 @@ const ListingDetail = () => {
                 </div>
                 <FavoriteButton listingId={listing.id} />
               </div>
-              <h1 className="font-display text-3xl md:text-4xl font-semibold text-foreground">{listing.title}</h1>
+              <h1 className="font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-foreground">{listing.title}</h1>
               <div className="flex items-center gap-5 mt-4 text-sm text-muted-foreground">
                 <span className="flex items-center gap-1.5"><Bed size={14} /> {listing.beds} beds</span>
                 <span className="flex items-center gap-1.5"><Bath size={14} /> {listing.baths} baths</span>

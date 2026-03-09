@@ -128,7 +128,7 @@ const ListingDetail = () => {
 
             <div>
               <h2 className="font-display text-xl font-semibold text-foreground mb-4">Amenities</h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3">
                 {listing.amenities.map((a) => (
                   <div key={a} className="flex items-center gap-2.5 text-sm text-muted-foreground bg-muted px-4 py-3 rounded">
                     <Check size={14} className="text-primary flex-shrink-0" />

@@ -109,7 +109,7 @@ const ServicePageLayout = ({
       )}
 
       {/* Intro */}
-      <section className="container px-5 md:px-8 py-16 md:py-24 max-w-4xl">
+      <section className="container px-4 sm:px-5 md:px-8 py-12 sm:py-16 md:py-24 max-w-4xl">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
           <p className="text-primary text-xs font-medium tracking-[0.3em] uppercase mb-3">{introLabel}</p>
           <h2 className="font-display text-3xl md:text-4xl font-semibold text-foreground mb-6">{introTitle}</h2>

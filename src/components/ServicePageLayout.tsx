@@ -161,7 +161,7 @@ const ServicePageLayout = ({
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="flex gap-6 md:gap-10 items-start group"
+                className="flex gap-4 sm:gap-6 md:gap-10 items-start group"
               >
                 <div className="flex flex-col items-center shrink-0">
                   <div className="w-12 h-12 rounded-full border-2 border-primary/40 flex items-center justify-center group-hover:border-primary group-hover:shadow-[0_0_20px_-5px_hsl(var(--primary)/0.4)] transition-all duration-500">

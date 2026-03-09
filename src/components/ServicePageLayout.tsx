@@ -99,8 +99,8 @@ const ServicePageLayout = ({
                   transition={{ delay: i * 0.1 }}
                   className="py-8 sm:py-10 px-4 sm:px-6 text-center border-r border-border last:border-r-0 [&:nth-child(2)]:border-r-0 md:[&:nth-child(2)]:border-r"
                 >
-                  <p className="font-display text-3xl md:text-4xl font-bold gold-gradient-text">{stat.value}</p>
-                  <p className="text-muted-foreground text-xs tracking-[0.2em] uppercase mt-2 font-light">{stat.label}</p>
+                  <p className="font-display text-2xl sm:text-3xl md:text-4xl font-bold gold-gradient-text">{stat.value}</p>
+                  <p className="text-muted-foreground text-[10px] sm:text-xs tracking-[0.2em] uppercase mt-2 font-light">{stat.label}</p>
                 </motion.div>
               ))}
             </div>

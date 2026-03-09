@@ -7,8 +7,9 @@ import { format } from "date-fns";
 import {
   CalendarDays, Users, MessageSquare, Mail, Shield, ArrowRight,
   LogIn, Clock, XCircle, CheckCircle, Loader2, Search, Download,
-  ChevronDown, Eye
+  ChevronDown, Image
 } from "lucide-react";
+import ServiceImageManager from "@/components/admin/ServiceImageManager";
 import { toast } from "sonner";
 
 interface AdminAppointment {

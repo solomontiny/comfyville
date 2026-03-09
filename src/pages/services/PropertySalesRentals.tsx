@@ -6,7 +6,8 @@ import { useServiceImage } from "@/hooks/useServiceImages";
 const PropertySalesRentals = () => {
   const heroImage = useServiceImage("property-sales-rentals", fallbackImage);
   return (
-    heroLabel="Our Services"
+  <ServicePageLayout
+    heroImage={heroImage}
     heroTitle="Property Sales & Rentals"
     heroSubtitle="Premium real estate transactions powered by expertise, trust, and an unwavering commitment to your satisfaction."
     introLabel="What We Offer"

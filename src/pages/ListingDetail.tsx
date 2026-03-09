@@ -64,7 +64,7 @@ const ListingDetail = () => {
   return (
     <main className="pt-20 md:pt-24">
       {/* Gallery Hero */}
-      <section className="container px-5 md:px-8 py-6 md:py-8">
+      <section className="container px-4 sm:px-5 md:px-8 py-4 sm:py-6 md:py-8">
         <Link
           to="/listings"
           className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-6 tracking-wide uppercase"

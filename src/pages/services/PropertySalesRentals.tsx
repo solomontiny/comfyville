@@ -1,6 +1,7 @@
 import { Building2, Key, TrendingUp, Shield, MapPin, CheckCircle } from "lucide-react";
 import ServicePageLayout from "@/components/ServicePageLayout";
-import heroImage from "@/assets/service-sales.jpg";
+import fallbackImage from "@/assets/service-sales.jpg";
+import { useServiceImage } from "@/hooks/useServiceImages";
 
 const PropertySalesRentals = () => (
   <ServicePageLayout

@@ -72,15 +72,15 @@ const ListingDetail = () => {
           <ArrowLeft size={14} /> All Spaces
         </Link>
 
-        <motion.div initial={{ opacity: 0 }} animasm:grid-cols-3 gap-2 sm:1sm:grid-cols-3 gap-2 sm:gsm:grid-cols-3 gap-2 sm:smd:grid-cols-3 gap-3">
- sm       <div className="md:col-span-2 aspect-[16/10] rounded-lg overflow-hidden">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3">
+          <div className="sm:col-span-2 aspect-[16/10] rounded-lg overflow-hidden">
             <img
               src={listing.images[selectedImage]}
               alt={listing.title}
               className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
             />
           </div>
-      sm:flex-col gap-2 sm:gap-3 overflow-x-auto sm:overflow-x-visiblee="flex md:flex-col gap-3">
+          <div className="flex sm:flex-col gap-2 sm:gap-3 overflow-x-auto sm:overflow-x-visible">
             {listing.images.map((img, i) => (
               <button
                 key={i}

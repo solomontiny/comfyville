@@ -75,12 +75,12 @@ const ServicePageLayout = ({
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
         <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-primary to-transparent" />
-        <div className="container px-5 md:px-8 relative z-10 pb-16">
+        <div className="container px-4 sm:px-5 md:px-8 relative z-10 pb-10 sm:pb-16">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-            <motion.div initial={{ width: 0 }} animate={{ width: 60 }} transition={{ duration: 0.8, delay: 0.3 }} className="h-[1px] bg-primary mb-6" />
-            <p className="text-white/50 text-xs tracking-[0.3em] uppercase mb-3">{heroLabel}</p>
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white max-w-3xl leading-tight">{heroTitle}</h1>
-            <p className="text-white/60 text-base md:text-lg font-light mt-4 max-w-xl">{heroSubtitle}</p>
+            <motion.div initial={{ width: 0 }} animate={{ width: 60 }} transition={{ duration: 0.8, delay: 0.3 }} className="h-[1px] bg-primary mb-4 sm:mb-6" />
+            <p className="text-white/50 text-[10px] sm:text-xs tracking-[0.3em] uppercase mb-2 sm:mb-3">{heroLabel}</p>
+            <h1 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white max-w-3xl leading-tight">{heroTitle}</h1>
+            <p className="text-white/60 text-sm sm:text-base md:text-lg font-light mt-3 sm:mt-4 max-w-xl">{heroSubtitle}</p>
           </motion.div>
         </div>
       </section>

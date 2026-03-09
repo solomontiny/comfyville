@@ -175,7 +175,7 @@ const AdminDashboard = () => {
     { key: "appointments" as const, label: "Appointments", icon: CalendarDays, count: appointments.length },
     { key: "subscribers" as const, label: "Subscribers", icon: Mail, count: subscribers.length },
     { key: "chats" as const, label: "Chat Logs", icon: MessageSquare, count: chatLogs.length },
-    { key: "listings" as const, label: "Listings", icon: Users, count: 6 },
+    { key: "images" as const, label: "Service Images", icon: Image, count: 6 },
   ];
 
   return (

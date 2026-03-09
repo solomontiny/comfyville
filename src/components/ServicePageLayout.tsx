@@ -130,7 +130,7 @@ const ServicePageLayout = ({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08 }}
-                className="group relative p-8 border border-white/10 rounded-lg hover:border-primary/40 transition-all duration-500 overflow-hidden"
+                className="group relative p-5 sm:p-8 border border-white/10 rounded-lg hover:border-primary/40 transition-all duration-500 overflow-hidden"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="relative z-10">

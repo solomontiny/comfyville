@@ -8,6 +8,7 @@ const PropertySalesRentals = () => {
   return (
   <ServicePageLayout
     heroImage={heroImage}
+    heroLabel="Our Services"
     heroTitle="Property Sales & Rentals"
     heroSubtitle="Premium real estate transactions powered by expertise, trust, and an unwavering commitment to your satisfaction."
     introLabel="What We Offer"

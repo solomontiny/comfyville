@@ -41,6 +41,7 @@ const PropertySalesRentals = () => {
     ctaTitle="Ready to Find Your Dream Property?"
     ctaText="Let our experts guide you to the perfect home or investment opportunity."
   />
-);
+  );
+};
 
 export default PropertySalesRentals;

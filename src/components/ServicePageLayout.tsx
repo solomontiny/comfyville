@@ -120,9 +120,9 @@ const ServicePageLayout = ({
       </section>
 
       {/* Features Grid */}
-      <section className="luxury-section-dark py-24">
-        <div className="container px-5 md:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+      <section className="luxury-section-dark py-16 sm:py-20 md:py-24">
+        <div className="container px-4 sm:px-5 md:px-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-6xl mx-auto">
             {features.map(({ icon: Icon, title, text }, i) => (
               <motion.div
                 key={i}

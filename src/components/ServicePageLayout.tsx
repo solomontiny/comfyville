@@ -148,10 +148,10 @@ const ServicePageLayout = ({
 
       {/* Process Steps */}
       {processSteps && processSteps.length > 0 && (
-        <section className="container px-5 md:px-8 py-16 md:py-24">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+        <section className="container px-4 sm:px-5 md:px-8 py-12 sm:py-16 md:py-24">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10 sm:mb-16">
             <p className="text-primary text-xs font-medium tracking-[0.3em] uppercase mb-3">{processSubtitle || "How It Works"}</p>
-            <h2 className="font-display text-3xl md:text-4xl font-semibold text-foreground">{processTitle || "Our Process"}</h2>
+            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-foreground">{processTitle || "Our Process"}</h2>
           </motion.div>
           <div className="max-w-4xl mx-auto space-y-0">
             {processSteps.map((step, i) => (

@@ -64,7 +64,7 @@ const ServicePageLayout = ({
 }: ServicePageLayoutProps) => (
     <main className="pt-20 md:pt-24">
       {/* Hero */}
-      <section className="relative h-[65vh] min-h-[480px] flex items-end overflow-hidden">
+      <section className="relative h-[50vh] sm:h-[55vh] md:h-[65vh] min-h-[360px] sm:min-h-[420px] md:min-h-[480px] flex items-end overflow-hidden">
         <motion.img
           src={heroImage}
           alt={heroTitle}

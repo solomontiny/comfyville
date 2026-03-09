@@ -97,7 +97,7 @@ const ServicePageLayout = ({
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="py-10 px-6 text-center border-r border-border last:border-r-0"
+                  className="py-8 sm:py-10 px-4 sm:px-6 text-center border-r border-border last:border-r-0 [&:nth-child(2)]:border-r-0 md:[&:nth-child(2)]:border-r"
                 >
                   <p className="font-display text-3xl md:text-4xl font-bold gold-gradient-text">{stat.value}</p>
                   <p className="text-muted-foreground text-xs tracking-[0.2em] uppercase mt-2 font-light">{stat.label}</p>

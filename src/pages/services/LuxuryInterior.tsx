@@ -1,8 +1,11 @@
 import { Palette, Sofa, Lamp, Ruler, Gem, PaintBucket, Box, Eye, Monitor } from "lucide-react";
 import ServicePageLayout from "@/components/ServicePageLayout";
-import heroImage from "@/assets/service-interior.jpg";
+import fallbackImage from "@/assets/service-interior.jpg";
+import { useServiceImage } from "@/hooks/useServiceImages";
 
-const LuxuryInterior = () => (
+const LuxuryInterior = () => {
+  const heroImage = useServiceImage("luxury-interior", fallbackImage);
+  return (
   <ServicePageLayout
     heroImage={heroImage}
     heroLabel="Our Services"
@@ -43,6 +46,7 @@ const LuxuryInterior = () => (
     ctaTitle="Visualize Your Dream Space"
     ctaText="Let our designers create photorealistic 3D renders and transform your vision into reality."
   />
-);
+  );
+};
 
 export default LuxuryInterior;

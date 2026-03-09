@@ -1,8 +1,11 @@
 import { GraduationCap, Compass, HandCoins, BookOpen, Users, Target } from "lucide-react";
 import ServicePageLayout from "@/components/ServicePageLayout";
-import heroImage from "@/assets/service-guidance.jpg";
+import fallbackImage from "@/assets/service-guidance.jpg";
+import { useServiceImage } from "@/hooks/useServiceImages";
 
-const InvestorGuidance = () => (
+const InvestorGuidance = () => {
+  const heroImage = useServiceImage("investor-guidance", fallbackImage);
+  return (
   <ServicePageLayout
     heroImage={heroImage}
     heroLabel="Our Services"
@@ -39,6 +42,7 @@ const InvestorGuidance = () => (
     ctaTitle="Start Your Real Estate Journey"
     ctaText="Get expert guidance tailored to your goals and experience level."
   />
-);
+  );
+};
 
 export default InvestorGuidance;

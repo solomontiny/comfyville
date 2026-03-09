@@ -7,53 +7,65 @@ import serviceManagement from "@/assets/service-management.jpg";
 import serviceLand from "@/assets/service-land.jpg";
 import serviceInterior from "@/assets/service-interior.jpg";
 import serviceGuidance from "@/assets/service-guidance.jpg";
+import { useAllServiceImages } from "@/hooks/useServiceImages";
 
-const services = [
+const fallbacks: Record<string, string> = {
+  "property-sales-rentals": serviceSales,
+  "short-term-apartments": serviceApartments,
+  "property-management": serviceManagement,
+  "land-investment": serviceLand,
+  "luxury-interior": serviceInterior,
+  "investor-guidance": serviceGuidance,
+};
+
+const serviceData = [
   {
+    key: "property-sales-rentals",
     icon: Building2,
     title: "Property Sales & Rentals",
     description: "Buy, sell, or rent premium properties across Nigeria with expert guidance and verified listings.",
-    image: serviceSales,
     link: "/services/property-sales-rentals",
   },
   {
+    key: "short-term-apartments",
     icon: Home,
     title: "Short-term & Serviced Apartments",
     description: "Hotel-grade luxury meets home comfort. Fully furnished apartments for flexible stays.",
-    image: serviceApartments,
     link: "/services/short-term-apartments",
   },
   {
+    key: "property-management",
     icon: Settings,
     title: "Property Management & Facility Care",
     description: "Comprehensive property oversight—from tenant management to maintenance and financial reporting.",
-    image: serviceManagement,
     link: "/services/property-management",
   },
   {
+    key: "land-investment",
     icon: Landmark,
     title: "Land & Investment Advisory",
     description: "Strategic land acquisition and investment guidance built on deep market intelligence.",
-    image: serviceLand,
     link: "/services/land-investment",
   },
   {
+    key: "luxury-interior",
     icon: Palette,
     title: "Luxury Interiors & 3D Visualizations",
     description: "Transform spaces with bespoke design, 3D interior & exterior renders, and expert craftsmanship.",
-    image: serviceInterior,
     link: "/services/luxury-interior",
   },
   {
+    key: "investor-guidance",
     icon: GraduationCap,
     title: "Investor & First-Time Buyer Guidance",
     description: "Expert support and education to help you make confident, well-informed real estate decisions.",
-    image: serviceGuidance,
     link: "/services/investor-guidance",
   },
 ];
 
-const Services = () => (
+const Services = () => {
+  const { images } = useAllServiceImages();
+  return (
   <main className="pt-20 md:pt-24">
     {/* Hero */}
     <section className="luxury-section-dark py-24 md:py-32 relative overflow-hidden">
@@ -76,8 +88,9 @@ const Services = () => (
     {/* Services Grid */}
     <section className="container px-5 md:px-8 py-16 md:py-24">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {services.map((service, i) => {
+        {serviceData.map((service, i) => {
           const Icon = service.icon;
+          const imgSrc = images[service.key] || fallbacks[service.key];
           return (
             <motion.div
               key={i}
@@ -92,7 +105,7 @@ const Services = () => (
               >
                 <div className="relative h-52 overflow-hidden">
                   <img
-                    src={service.image}
+                    src={imgSrc}
                     alt={service.title}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     loading="lazy"
@@ -140,6 +153,7 @@ const Services = () => (
       </div>
     </section>
   </main>
-);
+  );
+};
 
 export default Services;

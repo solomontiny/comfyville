@@ -46,6 +46,7 @@ const LuxuryInterior = () => {
     ctaTitle="Visualize Your Dream Space"
     ctaText="Let our designers create photorealistic 3D renders and transform your vision into reality."
   />
-);
+  );
+};
 
 export default LuxuryInterior;

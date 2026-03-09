@@ -42,6 +42,7 @@ const ShortTermApartments = () => {
     ctaTitle="Book Your Perfect Stay"
     ctaText="Discover serviced apartments that redefine comfort and convenience."
   />
-);
+  );
+};
 
 export default ShortTermApartments;

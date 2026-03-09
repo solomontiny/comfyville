@@ -42,6 +42,7 @@ const InvestorGuidance = () => {
     ctaTitle="Start Your Real Estate Journey"
     ctaText="Get expert guidance tailored to your goals and experience level."
   />
-);
+  );
+};
 
 export default InvestorGuidance;

@@ -42,6 +42,7 @@ const LandInvestment = () => {
     ctaTitle="Start Building Your Portfolio"
     ctaText="Let us help you identify and acquire high-value land investments."
   />
-);
+  );
+};
 
 export default LandInvestment;

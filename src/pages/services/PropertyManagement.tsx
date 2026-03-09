@@ -42,6 +42,7 @@ const PropertyManagement = () => {
     ctaTitle="Let Us Manage Your Property"
     ctaText="Focus on what matters while we handle the rest."
   />
-);
+  );
+};
 
 export default PropertyManagement;

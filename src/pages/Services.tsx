@@ -156,6 +156,7 @@ const Services = () => {
       </div>
     </section>
   </main>
-);
+  );
+};
 
 export default Services;

@@ -8,6 +8,7 @@ import logo from "@/assets/logo.jpeg";
 const primaryLinks = [
   { to: "/", label: "Home" },
   { to: "/listings", label: "Spaces" },
+  { to: "/store", label: "Store" },
   { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },
 ];

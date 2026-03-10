@@ -10,6 +10,7 @@ import {
   ChevronDown, Image
 } from "lucide-react";
 import ServiceImageManager from "@/components/admin/ServiceImageManager";
+import PropertyImageManager from "@/components/admin/PropertyImageManager";
 import { toast } from "sonner";
 
 interface AdminAppointment {
@@ -51,7 +52,7 @@ const AdminDashboard = () => {
   const { user, loading: authLoading } = useAuth();
   const navigate = useNavigate();
   const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
-  const [activeTab, setActiveTab] = useState<"appointments" | "subscribers" | "chats" | "images">("appointments");
+  const [activeTab, setActiveTab] = useState<"appointments" | "subscribers" | "chats" | "images" | "properties">("appointments");
   const [appointments, setAppointments] = useState<AdminAppointment[]>([]);
   const [subscribers, setSubscribers] = useState<Subscriber[]>([]);
   const [chatLogs, setChatLogs] = useState<ChatLog[]>([]);
@@ -176,6 +177,7 @@ const AdminDashboard = () => {
     { key: "subscribers" as const, label: "Subscribers", icon: Mail, count: subscribers.length },
     { key: "chats" as const, label: "Chat Logs", icon: MessageSquare, count: chatLogs.length },
     { key: "images" as const, label: "Service Images", icon: Image, count: 6 },
+    { key: "properties" as const, label: "Property Photos", icon: Image, count: 0 },
   ];
 
   return (
@@ -390,6 +392,13 @@ const AdminDashboard = () => {
             {activeTab === "images" && (
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                 <ServiceImageManager />
+              </motion.div>
+            )}
+
+            {/* Property Photos Tab */}
+            {activeTab === "properties" && (
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                <PropertyImageManager />
               </motion.div>
             )}
           </>

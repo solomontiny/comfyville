@@ -28,6 +28,7 @@ import InvestorGuidance from "./pages/services/InvestorGuidance";
 import JoinTeam from "./pages/JoinTeam";
 import OurTeam from "./pages/OurTeam";
 import AdminDashboard from "./pages/AdminDashboard";
+import Store from "./pages/Store";
 
 const queryClient = new QueryClient();
 

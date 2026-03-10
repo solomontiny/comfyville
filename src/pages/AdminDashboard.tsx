@@ -177,6 +177,7 @@ const AdminDashboard = () => {
     { key: "subscribers" as const, label: "Subscribers", icon: Mail, count: subscribers.length },
     { key: "chats" as const, label: "Chat Logs", icon: MessageSquare, count: chatLogs.length },
     { key: "images" as const, label: "Service Images", icon: Image, count: 6 },
+    { key: "properties" as const, label: "Property Photos", icon: Image, count: 0 },
   ];
 
   return (

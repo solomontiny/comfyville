@@ -10,6 +10,7 @@ import {
   ChevronDown, Image
 } from "lucide-react";
 import ServiceImageManager from "@/components/admin/ServiceImageManager";
+import PropertyImageManager from "@/components/admin/PropertyImageManager";
 import { toast } from "sonner";
 
 interface AdminAppointment {

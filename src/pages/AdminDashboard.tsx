@@ -394,6 +394,13 @@ const AdminDashboard = () => {
                 <ServiceImageManager />
               </motion.div>
             )}
+
+            {/* Property Photos Tab */}
+            {activeTab === "properties" && (
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                <PropertyImageManager />
+              </motion.div>
+            )}
           </>
         )}
       </section>

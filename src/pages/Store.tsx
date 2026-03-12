@@ -114,22 +114,22 @@ const Store = () => {
   };
 
   return (
-    <main className="pt-20 md:pt-24">
+    <main className="pt-16 md:pt-24">
       {/* Hero */}
-      <section className="luxury-section-dark py-20 md:py-28 relative overflow-hidden">
+      <section className="luxury-section-dark py-14 sm:py-20 md:py-28 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/3" />
         <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-primary to-transparent" />
         <div className="container px-5 md:px-8 relative z-10 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-            <motion.div initial={{ width: 0 }} animate={{ width: 60 }} transition={{ duration: 0.8, delay: 0.3 }} className="h-[1px] bg-primary mb-6 mx-auto" />
-            <div className="flex items-center justify-center gap-2 mb-4">
-              <ShoppingBag size={16} className="text-primary" />
-              <p className="text-white/50 text-xs tracking-[0.3em] uppercase">Free Services</p>
+            <motion.div initial={{ width: 0 }} animate={{ width: 60 }} transition={{ duration: 0.8, delay: 0.3 }} className="h-[1px] bg-primary mb-5 sm:mb-6 mx-auto" />
+            <div className="flex items-center justify-center gap-2 mb-3 sm:mb-4">
+              <ShoppingBag size={14} className="text-primary sm:w-4 sm:h-4" />
+              <p className="text-white/50 text-[10px] sm:text-xs tracking-[0.3em] uppercase">Free Services</p>
             </div>
-            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white max-w-3xl mx-auto leading-tight">
+            <h1 className="font-display text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white max-w-3xl mx-auto leading-tight">
               Our Service Store
             </h1>
-            <p className="text-white/60 text-sm sm:text-base md:text-lg font-light mt-4 sm:mt-6 max-w-xl mx-auto">
+            <p className="text-white/60 text-xs sm:text-base md:text-lg font-light mt-3 sm:mt-6 max-w-xl mx-auto leading-relaxed">
               Browse our services, view property galleries, and get a free consultation — no charges, no commitments.
             </p>
           </motion.div>
@@ -137,13 +137,13 @@ const Store = () => {
       </section>
 
       {/* Services Grid */}
-      <section className="container px-4 sm:px-5 md:px-8 py-12 md:py-20">
-        <div className="text-center mb-10 md:mb-14">
-          <p className="text-primary text-xs tracking-[0.3em] uppercase mb-2">Browse & Inquire</p>
-          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-foreground">
+      <section className="container px-4 sm:px-5 md:px-8 py-10 md:py-20">
+        <div className="text-center mb-8 md:mb-14">
+          <p className="text-primary text-[10px] sm:text-xs tracking-[0.3em] uppercase mb-2">Browse & Inquire</p>
+          <h2 className="font-display text-xl sm:text-3xl md:text-4xl font-semibold text-foreground">
             Explore Our Services
           </h2>
-          <p className="text-muted-foreground text-sm font-light mt-3 max-w-md mx-auto">
+          <p className="text-muted-foreground text-xs sm:text-sm font-light mt-2 sm:mt-3 max-w-md mx-auto">
             Click on any service to see property images and get in touch for a free consultation.
           </p>
         </div>

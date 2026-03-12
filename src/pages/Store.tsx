@@ -137,13 +137,13 @@ const Store = () => {
       </section>
 
       {/* Services Grid */}
-      <section className="container px-4 sm:px-5 md:px-8 py-12 md:py-20">
-        <div className="text-center mb-10 md:mb-14">
-          <p className="text-primary text-xs tracking-[0.3em] uppercase mb-2">Browse & Inquire</p>
-          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-foreground">
+      <section className="container px-4 sm:px-5 md:px-8 py-10 md:py-20">
+        <div className="text-center mb-8 md:mb-14">
+          <p className="text-primary text-[10px] sm:text-xs tracking-[0.3em] uppercase mb-2">Browse & Inquire</p>
+          <h2 className="font-display text-xl sm:text-3xl md:text-4xl font-semibold text-foreground">
             Explore Our Services
           </h2>
-          <p className="text-muted-foreground text-sm font-light mt-3 max-w-md mx-auto">
+          <p className="text-muted-foreground text-xs sm:text-sm font-light mt-2 sm:mt-3 max-w-md mx-auto">
             Click on any service to see property images and get in touch for a free consultation.
           </p>
         </div>

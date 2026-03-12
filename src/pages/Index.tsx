@@ -148,23 +148,23 @@ const Index = () => {
       </section>
 
       {/* Featured */}
-      <section className="bg-secondary py-16 md:py-24">
+      <section className="bg-secondary py-14 md:py-24">
         <div className="container px-5 md:px-8">
-          <div className="flex items-end justify-between mb-8 md:mb-12">
+          <div className="flex items-end justify-between mb-6 md:mb-12">
             <div>
               <p className="text-primary text-xs font-medium tracking-[0.3em] uppercase mb-2">Featured</p>
-              <h2 className="font-display text-3xl md:text-4xl font-semibold text-foreground">
+              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-foreground">
                 Handpicked Spaces
               </h2>
             </div>
             <Link
               to="/listings"
-              className="text-sm font-medium text-primary hover:text-primary/80 inline-flex items-center gap-2 transition-colors tracking-wide uppercase"
+              className="text-xs sm:text-sm font-medium text-primary hover:text-primary/80 inline-flex items-center gap-1.5 sm:gap-2 transition-colors tracking-wide uppercase whitespace-nowrap"
             >
               View all <ArrowRight size={14} />
             </Link>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
             {featured.map((listing, i) => (
               <ListingCard key={listing.id} listing={listing} index={i} />
             ))}

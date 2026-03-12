@@ -13,13 +13,13 @@ const Index = () => {
   return (
     <main>
       {/* Hero — Full viewport, dramatic overlay */}
-      <section className="relative h-[100svh] min-h-[600px] flex items-center overflow-hidden">
+      <section className="relative h-[100svh] min-h-[550px] flex items-end sm:items-center overflow-hidden pb-24 sm:pb-0">
         <img
           src={heroImage}
           alt="Luxury living space"
           className="absolute inset-0 w-full h-full object-cover scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/80 sm:from-black/70 sm:via-black/40 sm:to-black/70" />
 
         {/* Decorative gold line */}
         <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent" />
@@ -35,28 +35,28 @@ const Index = () => {
               initial={{ width: 0 }}
               animate={{ width: 60 }}
               transition={{ duration: 0.8, delay: 0.5 }}
-              className="h-[1px] bg-primary mb-8"
+              className="h-[1px] bg-primary mb-6 sm:mb-8"
             />
-            <p className="text-white/60 text-xs font-medium tracking-[0.35em] uppercase mb-6">
+            <p className="text-white/60 text-[10px] sm:text-xs font-medium tracking-[0.35em] uppercase mb-4 sm:mb-6">
               Premium Short-Stays & Investments
             </p>
-            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-bold text-white leading-[0.95]">
+            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white leading-[0.95]">
               Your Money's{" "}
               <span className="italic font-light gold-gradient-text">Worth</span>
             </h1>
-            <p className="text-white/50 mt-6 text-base md:text-lg max-w-md leading-relaxed font-light">
+            <p className="text-white/50 mt-4 sm:mt-6 text-sm sm:text-base md:text-lg max-w-md leading-relaxed font-light">
               Curated luxury spaces designed for comfort, style, and unforgettable experiences across the globe.
             </p>
-            <div className="flex flex-wrap gap-4 mt-10">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-8 sm:mt-10">
               <Link
                 to="/listings"
-                className="bg-primary text-primary-foreground px-8 py-4 rounded text-sm font-medium tracking-wide uppercase hover:bg-primary/90 transition-all duration-300 inline-flex items-center gap-3"
+                className="bg-primary text-primary-foreground px-8 py-4 rounded text-sm font-medium tracking-wide uppercase hover:bg-primary/90 active:bg-primary/80 transition-all duration-300 inline-flex items-center justify-center gap-3"
               >
                 Book Now <ArrowRight size={16} />
               </Link>
               <Link
                 to="/listings"
-                className="bg-white/5 backdrop-blur-sm text-white border border-white/15 px-8 py-4 rounded text-sm font-medium tracking-wide uppercase hover:bg-white/10 transition-all duration-300"
+                className="bg-white/5 backdrop-blur-sm text-white border border-white/15 px-8 py-4 rounded text-sm font-medium tracking-wide uppercase hover:bg-white/10 active:bg-white/15 transition-all duration-300 text-center"
               >
                 Explore Spaces
               </Link>
@@ -64,12 +64,12 @@ const Index = () => {
           </motion.div>
         </div>
 
-        {/* Scroll indicator */}
+        {/* Scroll indicator — hidden on small mobile */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2 hidden sm:flex"
         >
           <span className="text-white/30 text-[10px] tracking-[0.3em] uppercase">Scroll</span>
           <motion.div

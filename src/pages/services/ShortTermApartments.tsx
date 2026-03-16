@@ -1,8 +1,11 @@
 import { Home, Clock, Star, Wifi, UtensilsCrossed, ShieldCheck } from "lucide-react";
 import ServicePageLayout from "@/components/ServicePageLayout";
-import heroImage from "@/assets/service-apartments.jpg";
+import fallbackImage from "@/assets/service-apartments.jpg";
+import { useServiceImage } from "@/hooks/useServiceImages";
 
-const ShortTermApartments = () => (
+const ShortTermApartments = () => {
+  const heroImage = useServiceImage("short-term-apartments", fallbackImage);
+  return (
   <ServicePageLayout
     heroImage={heroImage}
     heroLabel="Our Services"
@@ -39,6 +42,7 @@ const ShortTermApartments = () => (
     ctaTitle="Book Your Perfect Stay"
     ctaText="Discover serviced apartments that redefine comfort and convenience."
   />
-);
+  );
+};
 
 export default ShortTermApartments;

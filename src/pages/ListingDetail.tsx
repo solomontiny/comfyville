@@ -64,7 +64,7 @@ const ListingDetail = () => {
   return (
     <main className="pt-20 md:pt-24">
       {/* Gallery Hero */}
-      <section className="container px-5 md:px-8 py-6 md:py-8">
+      <section className="container px-4 sm:px-5 md:px-8 py-4 sm:md:px-8 py-4 sm:md:px-8 py-4 sm:md:px-8 py-4 sm:py-6 md:py-8">
         <Link
           to="/listings"
           className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-6 tracking-wide uppercase"
@@ -72,15 +72,15 @@ const ListingDetail = () => {
           <ArrowLeft size={14} /> All Spaces
         </Link>
 
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="grid grid-cols-1 md:grid-cols-3 gap-3">
-          <div className="md:col-span-2 aspect-[16/10] rounded-lg overflow-hidden">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3">
+          <div className="sm:col-span-2 aspect-[16/10] rounded-lg overflow-hidden">
             <img
               src={listing.images[selectedImage]}
               alt={listing.title}
               className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
             />
           </div>
-          <div className="flex md:flex-col gap-3">
+          <div className="flex sm:flex-col gap-2 sm:gap-3 overflow-x-auto sm:overflow-x-visible">
             {listing.images.map((img, i) => (
               <button
                 key={i}
@@ -89,15 +89,15 @@ const ListingDetail = () => {
                   i === selectedImage ? "border-primary" : "border-transparent hover:border-primary/30"
                 }`}
               >
-                <img src={img} alt="" className="w-full h-full object-cover aspect-[4/3] md:aspect-auto" loading="lazy" />
+                <img src={img} alt="" className="w-full h-full object-cover aspect-[4/3] sm:aspect-auto min-w-[80px]" loading="lazy" />
               </button>
             ))}
           </div>
         </motion.div>
       </section>
 
-      <section className="container px-5 md:px-8 pb-12 md:pb-16">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+      <section className="container px-4 sm:px-5 md:px-8 pb-8 sm:pb-12 md:pb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
           {/* Details */}
           <div className="lg:col-span-2 space-y-10">
             <div>
@@ -108,8 +108,8 @@ const ListingDetail = () => {
                 </div>
                 <FavoriteButton listingId={listing.id} />
               </div>
-              <h1 className="font-display text-3xl md:text-4xl font-semibold text-foreground">{listing.title}</h1>
-              <div className="flex items-center gap-5 mt-4 text-sm text-muted-foreground">
+              <h1 className="font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-foreground">{listing.title}</h1>
+              <div className="flex flex-wrap items-center gap-3 sm:gap-5 mt-4 text-xs sm:text-sm text-muted-foreground">
                 <span className="flex items-center gap-1.5"><Bed size={14} /> {listing.beds} beds</span>
                 <span className="flex items-center gap-1.5"><Bath size={14} /> {listing.baths} baths</span>
                 <span className="flex items-center gap-1.5"><Users size={14} /> {listing.guests} guests</span>
@@ -128,7 +128,7 @@ const ListingDetail = () => {
 
             <div>
               <h2 className="font-display text-xl font-semibold text-foreground mb-4">Amenities</h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3">
                 {listing.amenities.map((a) => (
                   <div key={a} className="flex items-center gap-2.5 text-sm text-muted-foreground bg-muted px-4 py-3 rounded">
                     <Check size={14} className="text-primary flex-shrink-0" />

@@ -81,7 +81,7 @@ const JoinTeam = () => {
   };
 
   return (
-    <main className="pt-20">
+    <main className="pt-20 md:pt-24">
       {/* Full-viewport Hero with Image */}
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
         <img
@@ -110,7 +110,7 @@ const JoinTeam = () => {
             <p className="text-primary text-xs font-medium tracking-[0.4em] uppercase mb-6">
               We're Hiring
             </p>
-            <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-[0.95]">
+            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-5xl lg:text-7xl xl:text-8xl font-bold text-white leading-[0.95]">
               Build the
               <br />
               <span className="italic font-light gold-gradient-text">Future</span> with us

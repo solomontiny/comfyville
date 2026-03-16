@@ -13,13 +13,13 @@ const Index = () => {
   return (
     <main>
       {/* Hero — Full viewport, dramatic overlay */}
-      <section className="relative h-[100svh] min-h-[600px] flex items-center overflow-hidden">
+      <section className="relative h-[100svh] min-h-[550px] flex items-end sm:items-center overflow-hidden pb-24 sm:pb-0">
         <img
           src={heroImage}
           alt="Luxury living space"
           className="absolute inset-0 w-full h-full object-cover scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/80 sm:from-black/70 sm:via-black/40 sm:to-black/70" />
 
         {/* Decorative gold line */}
         <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent" />
@@ -35,28 +35,28 @@ const Index = () => {
               initial={{ width: 0 }}
               animate={{ width: 60 }}
               transition={{ duration: 0.8, delay: 0.5 }}
-              className="h-[1px] bg-primary mb-8"
+              className="h-[1px] bg-primary mb-6 sm:mb-8"
             />
-            <p className="text-white/60 text-xs font-medium tracking-[0.35em] uppercase mb-6">
+            <p className="text-white/60 text-[10px] sm:text-xs font-medium tracking-[0.35em] uppercase mb-4 sm:mb-6">
               Premium Short-Stays & Investments
             </p>
-            <h1 className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-[0.95]">
+            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white leading-[0.95]">
               Your Money's{" "}
               <span className="italic font-light gold-gradient-text">Worth</span>
             </h1>
-            <p className="text-white/50 mt-6 text-base md:text-lg max-w-md leading-relaxed font-light">
+            <p className="text-white/50 mt-4 sm:mt-6 text-sm sm:text-base md:text-lg max-w-md leading-relaxed font-light">
               Curated luxury spaces designed for comfort, style, and unforgettable experiences across the globe.
             </p>
-            <div className="flex flex-wrap gap-4 mt-10">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-8 sm:mt-10">
               <Link
                 to="/listings"
-                className="bg-primary text-primary-foreground px-8 py-4 rounded text-sm font-medium tracking-wide uppercase hover:bg-primary/90 transition-all duration-300 inline-flex items-center gap-3"
+                className="bg-primary text-primary-foreground px-8 py-4 rounded text-sm font-medium tracking-wide uppercase hover:bg-primary/90 active:bg-primary/80 transition-all duration-300 inline-flex items-center justify-center gap-3"
               >
                 Book Now <ArrowRight size={16} />
               </Link>
               <Link
                 to="/listings"
-                className="bg-white/5 backdrop-blur-sm text-white border border-white/15 px-8 py-4 rounded text-sm font-medium tracking-wide uppercase hover:bg-white/10 transition-all duration-300"
+                className="bg-white/5 backdrop-blur-sm text-white border border-white/15 px-8 py-4 rounded text-sm font-medium tracking-wide uppercase hover:bg-white/10 active:bg-white/15 transition-all duration-300 text-center"
               >
                 Explore Spaces
               </Link>
@@ -64,12 +64,12 @@ const Index = () => {
           </motion.div>
         </div>
 
-        {/* Scroll indicator */}
+        {/* Scroll indicator — hidden on small mobile */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2 hidden sm:flex"
         >
           <span className="text-white/30 text-[10px] tracking-[0.3em] uppercase">Scroll</span>
           <motion.div
@@ -97,21 +97,21 @@ const Index = () => {
       </section>
 
       {/* Why Comfyville */}
-      <section className="container px-5 md:px-8 py-16 md:py-24">
+      <section className="container px-5 md:px-8 py-14 md:py-24">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-10 md:mb-16"
         >
           <p className="text-primary text-xs font-medium tracking-[0.3em] uppercase mb-3">Why Choose Us</p>
-          <h2 className="font-display text-3xl md:text-4xl font-semibold text-foreground">
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-foreground">
             The Comfyville Difference
           </h2>
           <div className="luxury-divider mx-auto mt-4" />
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           {[
             {
               icon: Sparkles,
@@ -135,12 +135,12 @@ const Index = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.15 }}
-              className="luxury-card p-8 text-center"
+              className="luxury-card p-6 sm:p-8 text-center"
             >
-              <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-5">
-                <Icon size={22} className="text-primary" />
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4 sm:mb-5">
+                <Icon size={20} className="text-primary sm:w-[22px] sm:h-[22px]" />
               </div>
-              <h3 className="font-display text-xl font-semibold text-foreground mb-3">{title}</h3>
+              <h3 className="font-display text-lg sm:text-xl font-semibold text-foreground mb-2 sm:mb-3">{title}</h3>
               <p className="text-muted-foreground text-sm leading-relaxed font-light">{desc}</p>
             </motion.div>
           ))}
@@ -148,23 +148,23 @@ const Index = () => {
       </section>
 
       {/* Featured */}
-      <section className="bg-secondary py-16 md:py-24">
+      <section className="bg-secondary py-14 md:py-24">
         <div className="container px-5 md:px-8">
-          <div className="flex items-end justify-between mb-8 md:mb-12">
+          <div className="flex items-end justify-between mb-6 md:mb-12">
             <div>
               <p className="text-primary text-xs font-medium tracking-[0.3em] uppercase mb-2">Featured</p>
-              <h2 className="font-display text-3xl md:text-4xl font-semibold text-foreground">
+              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-foreground">
                 Handpicked Spaces
               </h2>
             </div>
             <Link
               to="/listings"
-              className="text-sm font-medium text-primary hover:text-primary/80 inline-flex items-center gap-2 transition-colors tracking-wide uppercase"
+              className="text-xs sm:text-sm font-medium text-primary hover:text-primary/80 inline-flex items-center gap-1.5 sm:gap-2 transition-colors tracking-wide uppercase whitespace-nowrap"
             >
               View all <ArrowRight size={14} />
             </Link>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
             {featured.map((listing, i) => (
               <ListingCard key={listing.id} listing={listing} index={i} />
             ))}

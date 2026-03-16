@@ -28,6 +28,7 @@ import InvestorGuidance from "./pages/services/InvestorGuidance";
 import JoinTeam from "./pages/JoinTeam";
 import OurTeam from "./pages/OurTeam";
 import AdminDashboard from "./pages/AdminDashboard";
+import Store from "./pages/Store";
 
 const queryClient = new QueryClient();
 
@@ -58,6 +59,7 @@ const App = () => (
             <Route path="/services/investor-guidance" element={<InvestorGuidance />} />
             <Route path="/join-team" element={<JoinTeam />} />
             <Route path="/our-team" element={<OurTeam />} />
+            <Route path="/store" element={<Store />} />
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

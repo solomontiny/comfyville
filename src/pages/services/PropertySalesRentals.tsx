@@ -1,8 +1,11 @@
 import { Building2, Key, TrendingUp, Shield, MapPin, CheckCircle } from "lucide-react";
 import ServicePageLayout from "@/components/ServicePageLayout";
-import heroImage from "@/assets/service-sales.jpg";
+import fallbackImage from "@/assets/service-sales.jpg";
+import { useServiceImage } from "@/hooks/useServiceImages";
 
-const PropertySalesRentals = () => (
+const PropertySalesRentals = () => {
+  const heroImage = useServiceImage("property-sales-rentals", fallbackImage);
+  return (
   <ServicePageLayout
     heroImage={heroImage}
     heroLabel="Our Services"
@@ -39,6 +42,7 @@ const PropertySalesRentals = () => (
     ctaTitle="Ready to Find Your Dream Property?"
     ctaText="Let our experts guide you to the perfect home or investment opportunity."
   />
-);
+  );
+};
 
 export default PropertySalesRentals;

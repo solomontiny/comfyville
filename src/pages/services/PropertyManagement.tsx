@@ -1,8 +1,11 @@
 import { Settings, Wrench, ClipboardList, Users, BarChart3, Sparkles } from "lucide-react";
 import ServicePageLayout from "@/components/ServicePageLayout";
-import heroImage from "@/assets/service-management.jpg";
+import fallbackImage from "@/assets/service-management.jpg";
+import { useServiceImage } from "@/hooks/useServiceImages";
 
-const PropertyManagement = () => (
+const PropertyManagement = () => {
+  const heroImage = useServiceImage("property-management", fallbackImage);
+  return (
   <ServicePageLayout
     heroImage={heroImage}
     heroLabel="Our Services"
@@ -39,6 +42,7 @@ const PropertyManagement = () => (
     ctaTitle="Let Us Manage Your Property"
     ctaText="Focus on what matters while we handle the rest."
   />
-);
+  );
+};
 
 export default PropertyManagement;

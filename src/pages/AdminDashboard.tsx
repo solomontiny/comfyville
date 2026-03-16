@@ -7,8 +7,10 @@ import { format } from "date-fns";
 import {
   CalendarDays, Users, MessageSquare, Mail, Shield, ArrowRight,
   LogIn, Clock, XCircle, CheckCircle, Loader2, Search, Download,
-  ChevronDown, Eye
+  ChevronDown, Image
 } from "lucide-react";
+import ServiceImageManager from "@/components/admin/ServiceImageManager";
+import PropertyImageManager from "@/components/admin/PropertyImageManager";
 import { toast } from "sonner";
 
 interface AdminAppointment {
@@ -50,7 +52,7 @@ const AdminDashboard = () => {
   const { user, loading: authLoading } = useAuth();
   const navigate = useNavigate();
   const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
-  const [activeTab, setActiveTab] = useState<"appointments" | "subscribers" | "chats" | "listings">("appointments");
+  const [activeTab, setActiveTab] = useState<"appointments" | "subscribers" | "chats" | "images" | "properties">("appointments");
   const [appointments, setAppointments] = useState<AdminAppointment[]>([]);
   const [subscribers, setSubscribers] = useState<Subscriber[]>([]);
   const [chatLogs, setChatLogs] = useState<ChatLog[]>([]);
@@ -174,7 +176,8 @@ const AdminDashboard = () => {
     { key: "appointments" as const, label: "Appointments", icon: CalendarDays, count: appointments.length },
     { key: "subscribers" as const, label: "Subscribers", icon: Mail, count: subscribers.length },
     { key: "chats" as const, label: "Chat Logs", icon: MessageSquare, count: chatLogs.length },
-    { key: "listings" as const, label: "Listings", icon: Users, count: 6 },
+    { key: "images" as const, label: "Service Images", icon: Image, count: 6 },
+    { key: "properties" as const, label: "Property Photos", icon: Image, count: 0 },
   ];
 
   return (
@@ -385,22 +388,17 @@ const AdminDashboard = () => {
               </motion.div>
             )}
 
-            {/* Listings Tab */}
-            {activeTab === "listings" && (
+            {/* Service Images Tab */}
+            {activeTab === "images" && (
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-                <div className="luxury-card p-8 text-center">
-                  <Eye size={36} className="mx-auto text-muted-foreground mb-4" />
-                  <h3 className="font-display text-lg font-semibold text-foreground mb-2">Listings Management</h3>
-                  <p className="text-sm text-muted-foreground font-light mb-4">
-                    Listings are currently managed through the codebase. Database-driven listings management coming soon.
-                  </p>
-                  <Link
-                    to="/listings"
-                    className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded text-sm font-medium tracking-wide uppercase hover:bg-primary/90 transition-all duration-300"
-                  >
-                    View Current Listings <ArrowRight size={14} />
-                  </Link>
-                </div>
+                <ServiceImageManager />
+              </motion.div>
+            )}
+
+            {/* Property Photos Tab */}
+            {activeTab === "properties" && (
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                <PropertyImageManager />
               </motion.div>
             )}
           </>

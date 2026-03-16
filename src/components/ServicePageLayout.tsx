@@ -64,7 +64,7 @@ const ServicePageLayout = ({
 }: ServicePageLayoutProps) => (
     <main className="pt-20 md:pt-24">
       {/* Hero */}
-      <section className="relative h-[65vh] min-h-[480px] flex items-end overflow-hidden">
+      <section className="relative h-[50vh] sm:h-[55vh] md:h-[65vh] min-h-[360px] sm:min-h-[420px] md:min-h-[480px] flex items-end overflow-hidden">
         <motion.img
           src={heroImage}
           alt={heroTitle}
@@ -75,12 +75,12 @@ const ServicePageLayout = ({
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
         <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-primary to-transparent" />
-        <div className="container px-5 md:px-8 relative z-10 pb-16">
+        <div className="container px-4 sm:px-5 md:px-8 relative z-10 pb-10 sm:pb-16">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-            <motion.div initial={{ width: 0 }} animate={{ width: 60 }} transition={{ duration: 0.8, delay: 0.3 }} className="h-[1px] bg-primary mb-6" />
-            <p className="text-white/50 text-xs tracking-[0.3em] uppercase mb-3">{heroLabel}</p>
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white max-w-3xl leading-tight">{heroTitle}</h1>
-            <p className="text-white/60 text-base md:text-lg font-light mt-4 max-w-xl">{heroSubtitle}</p>
+            <motion.div initial={{ width: 0 }} animate={{ width: 60 }} transition={{ duration: 0.8, delay: 0.3 }} className="h-[1px] bg-primary mb-4 sm:mb-6" />
+            <p className="text-white/50 text-[10px] sm:text-xs tracking-[0.3em] uppercase mb-2 sm:mb-3">{heroLabel}</p>
+            <h1 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white max-w-3xl leading-tight">{heroTitle}</h1>
+            <p className="text-white/60 text-sm sm:text-base md:text-lg font-light mt-3 sm:mt-4 max-w-xl">{heroSubtitle}</p>
           </motion.div>
         </div>
       </section>
@@ -97,10 +97,10 @@ const ServicePageLayout = ({
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="py-10 px-6 text-center border-r border-border last:border-r-0"
+                  className="py-8 sm:py-10 px-4 sm:px-6 text-center border-r border-border last:border-r-0 [&:nth-child(2)]:border-r-0 md:[&:nth-child(2)]:border-r"
                 >
-                  <p className="font-display text-3xl md:text-4xl font-bold gold-gradient-text">{stat.value}</p>
-                  <p className="text-muted-foreground text-xs tracking-[0.2em] uppercase mt-2 font-light">{stat.label}</p>
+                  <p className="font-display text-2xl sm:text-3xl md:text-4xl font-bold gold-gradient-text">{stat.value}</p>
+                  <p className="text-muted-foreground text-[10px] sm:text-xs tracking-[0.2em] uppercase mt-2 font-light">{stat.label}</p>
                 </motion.div>
               ))}
             </div>
@@ -109,10 +109,10 @@ const ServicePageLayout = ({
       )}
 
       {/* Intro */}
-      <section className="container px-5 md:px-8 py-16 md:py-24 max-w-4xl">
+      <section className="container px-4 sm:px-5 md:px-8 py-12 sm:py-16 md:py-24 max-w-4xl">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
           <p className="text-primary text-xs font-medium tracking-[0.3em] uppercase mb-3">{introLabel}</p>
-          <h2 className="font-display text-3xl md:text-4xl font-semibold text-foreground mb-6">{introTitle}</h2>
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-foreground mb-4 sm:mb-6">{introTitle}</h2>
           <div className="luxury-divider mb-8" />
           <p className="text-muted-foreground leading-relaxed text-lg font-light">{introText}</p>
           {introText2 && <p className="text-muted-foreground leading-relaxed text-lg font-light mt-4">{introText2}</p>}
@@ -120,9 +120,9 @@ const ServicePageLayout = ({
       </section>
 
       {/* Features Grid */}
-      <section className="luxury-section-dark py-24">
-        <div className="container px-5 md:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+      <section className="luxury-section-dark py-16 sm:py-20 md:py-24">
+        <div className="container px-4 sm:px-5 md:px-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-6xl mx-auto">
             {features.map(({ icon: Icon, title, text }, i) => (
               <motion.div
                 key={i}
@@ -130,7 +130,7 @@ const ServicePageLayout = ({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08 }}
-                className="group relative p-8 border border-white/10 rounded-lg hover:border-primary/40 transition-all duration-500 overflow-hidden"
+                className="group relative p-5 sm:p-8 border border-white/10 rounded-lg hover:border-primary/40 transition-all duration-500 overflow-hidden"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="relative z-10">
@@ -148,10 +148,10 @@ const ServicePageLayout = ({
 
       {/* Process Steps */}
       {processSteps && processSteps.length > 0 && (
-        <section className="container px-5 md:px-8 py-16 md:py-24">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+        <section className="container px-4 sm:px-5 md:px-8 py-12 sm:py-16 md:py-24">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10 sm:mb-16">
             <p className="text-primary text-xs font-medium tracking-[0.3em] uppercase mb-3">{processSubtitle || "How It Works"}</p>
-            <h2 className="font-display text-3xl md:text-4xl font-semibold text-foreground">{processTitle || "Our Process"}</h2>
+            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-foreground">{processTitle || "Our Process"}</h2>
           </motion.div>
           <div className="max-w-4xl mx-auto space-y-0">
             {processSteps.map((step, i) => (
@@ -161,7 +161,7 @@ const ServicePageLayout = ({
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="flex gap-6 md:gap-10 items-start group"
+                className="flex gap-4 sm:gap-6 md:gap-10 items-start group"
               >
                 <div className="flex flex-col items-center shrink-0">
                   <div className="w-12 h-12 rounded-full border-2 border-primary/40 flex items-center justify-center group-hover:border-primary group-hover:shadow-[0_0_20px_-5px_hsl(var(--primary)/0.4)] transition-all duration-500">

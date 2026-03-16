@@ -8,6 +8,7 @@ import logo from "@/assets/logo.jpeg";
 const primaryLinks = [
   { to: "/", label: "Home" },
   { to: "/listings", label: "Spaces" },
+  { to: "/store", label: "Store" },
   { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },
 ];
@@ -216,38 +217,60 @@ const Navbar = () => {
         </button>
       </nav>
 
-      {/* Mobile menu */}
+      {/* Mobile menu — fullscreen overlay */}
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-background border-b border-border overflow-hidden"
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "100%" }}
+            transition={{ type: "tween", duration: 0.3 }}
+            className="lg:hidden fixed inset-0 top-0 z-[100] bg-background overflow-y-auto"
           >
-            <div className="container px-5 md:px-8 py-4 flex flex-col">
+            {/* Mobile header */}
+            <div className="flex items-center justify-between px-5 h-20 border-b border-border">
+              <Link to="/" onClick={() => setOpen(false)} className="flex items-center gap-3">
+                <img src={logo} alt="Comfyville" className="w-10 h-10 rounded-lg object-cover" />
+                <span className="font-display text-2xl font-semibold tracking-tight">
+                  <span className="text-foreground">Comfy</span>
+                  <span className="text-primary">ville</span>
+                </span>
+              </Link>
+              <button
+                onClick={() => setOpen(false)}
+                className="w-11 h-11 rounded-full border border-border flex items-center justify-center text-foreground active:bg-muted transition-colors"
+              >
+                <X size={22} />
+              </button>
+            </div>
+
+            <div className="px-5 py-6 flex flex-col gap-1">
               {primaryLinks.map((link) => (
                 <Link
                   key={link.to}
                   to={link.to}
                   onClick={() => setOpen(false)}
-                  className={`text-sm font-medium tracking-wide uppercase py-3 px-2 rounded-lg transition-all duration-200 ${
-                    pathname === link.to ? "text-primary bg-primary/5" : "text-muted-foreground active:bg-muted"
+                  className={`text-base font-medium tracking-wide py-4 px-4 rounded-xl transition-all duration-200 border ${
+                    pathname === link.to
+                      ? "text-primary bg-primary/5 border-primary/20"
+                      : "text-foreground border-transparent active:bg-muted active:border-border"
                   }`}
                 >
                   {link.label}
                 </Link>
               ))}
 
-              {/* Mobile Services */}
+              {/* Mobile Services accordion */}
               <button
                 onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
-                className={`text-sm font-medium tracking-wide uppercase py-3 px-2 rounded-lg transition-all duration-200 flex items-center justify-between ${
-                  isServiceActive ? "text-primary bg-primary/5" : "text-muted-foreground active:bg-muted"
+                className={`text-base font-medium tracking-wide py-4 px-4 rounded-xl transition-all duration-200 flex items-center justify-between border ${
+                  isServiceActive
+                    ? "text-primary bg-primary/5 border-primary/20"
+                    : "text-foreground border-transparent active:bg-muted active:border-border"
                 }`}
               >
                 Services
-                <ChevronDown size={14} className={`transition-transform duration-200 ${mobileServicesOpen ? "rotate-180" : ""}`} />
+                <ChevronDown size={16} className={`transition-transform duration-300 ${mobileServicesOpen ? "rotate-180" : ""}`} />
               </button>
               <AnimatePresence>
                 {mobileServicesOpen && (
@@ -255,81 +278,93 @@ const Navbar = () => {
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: "auto" }}
                     exit={{ opacity: 0, height: 0 }}
-                    className="overflow-hidden bg-muted/30 rounded-lg mb-1"
+                    className="overflow-hidden"
                   >
-                    <Link
-                      to="/services"
-                      onClick={() => { setOpen(false); setMobileServicesOpen(false); }}
-                      className={`block text-sm py-2.5 px-4 font-semibold transition-colors ${
-                        pathname === "/services" ? "text-primary" : "text-foreground"
-                      }`}
-                    >
-                      View All Services
-                    </Link>
-                    {serviceLinks.map((link) => (
+                    <div className="bg-muted/40 rounded-xl mx-1 mb-1 py-2">
                       <Link
-                        key={link.to}
-                        to={link.to}
+                        to="/services"
                         onClick={() => { setOpen(false); setMobileServicesOpen(false); }}
-                        className={`block text-sm py-2.5 px-4 transition-colors ${
-                          pathname === link.to ? "text-primary" : "text-muted-foreground"
+                        className={`block text-sm py-3.5 px-5 font-semibold transition-colors ${
+                          pathname === "/services" ? "text-primary" : "text-foreground"
                         }`}
                       >
-                        {link.label}
+                        View All Services
                       </Link>
-                    ))}
+                      {serviceLinks.map((link) => (
+                        <Link
+                          key={link.to}
+                          to={link.to}
+                          onClick={() => { setOpen(false); setMobileServicesOpen(false); }}
+                          className={`block text-sm py-3.5 px-5 transition-colors ${
+                            pathname === link.to ? "text-primary" : "text-muted-foreground"
+                          }`}
+                        >
+                          {link.label}
+                        </Link>
+                      ))}
+                    </div>
                   </motion.div>
                 )}
               </AnimatePresence>
 
-              {/* More links in mobile */}
+              {/* Divider */}
+              <div className="h-px bg-border my-2 mx-2" />
+
+              {/* More links */}
               {moreLinks.map((link) => (
                 <Link
                   key={link.to}
                   to={link.to}
                   onClick={() => setOpen(false)}
-                  className={`text-sm font-medium tracking-wide uppercase py-3 px-2 rounded-lg transition-all duration-200 ${
-                    pathname === link.to ? "text-primary bg-primary/5" : "text-muted-foreground active:bg-muted"
+                  className={`text-base font-medium tracking-wide py-4 px-4 rounded-xl transition-all duration-200 border ${
+                    pathname === link.to
+                      ? "text-primary bg-primary/5 border-primary/20"
+                      : "text-foreground border-transparent active:bg-muted active:border-border"
                   }`}
                 >
                   {link.label}
                 </Link>
               ))}
 
-              <div className="border-t border-border/50 mt-2 pt-2">
-                {user ? (
-                  <>
-                    <Link
-                      to="/dashboard"
-                      onClick={() => setOpen(false)}
-                      className={`text-sm font-medium tracking-wide uppercase py-3 px-2 rounded-lg transition-all duration-200 flex items-center gap-2 ${
-                        pathname === "/dashboard" ? "text-primary bg-primary/5" : "text-muted-foreground active:bg-muted"
-                      }`}
-                    >
-                      <LayoutDashboard size={14} /> Dashboard
-                    </Link>
-                    <button
-                      onClick={() => { signOut(); setOpen(false); }}
-                      className="text-sm font-medium tracking-wide uppercase py-3 px-2 rounded-lg text-muted-foreground text-left flex items-center gap-2 w-full active:bg-muted transition-all duration-200"
-                    >
-                      <LogOut size={14} /> Sign Out
-                    </button>
-                  </>
-                ) : (
-                  <Link
-                    to="/auth"
-                    onClick={() => setOpen(false)}
-                    className="text-sm font-medium tracking-wide uppercase py-3 px-2 rounded-lg text-muted-foreground flex items-center gap-2 active:bg-muted transition-all duration-200"
-                  >
-                    <LogIn size={14} /> Sign In
-                  </Link>
-                )}
-              </div>
+              {/* Divider */}
+              <div className="h-px bg-border my-2 mx-2" />
 
+              {/* Auth */}
+              {user ? (
+                <>
+                  <Link
+                    to="/dashboard"
+                    onClick={() => setOpen(false)}
+                    className={`text-base font-medium tracking-wide py-4 px-4 rounded-xl transition-all duration-200 flex items-center gap-3 border ${
+                      pathname === "/dashboard"
+                        ? "text-primary bg-primary/5 border-primary/20"
+                        : "text-foreground border-transparent active:bg-muted active:border-border"
+                    }`}
+                  >
+                    <LayoutDashboard size={18} /> Dashboard
+                  </Link>
+                  <button
+                    onClick={() => { signOut(); setOpen(false); }}
+                    className="text-base font-medium tracking-wide py-4 px-4 rounded-xl text-muted-foreground text-left flex items-center gap-3 w-full active:bg-muted border border-transparent active:border-border transition-all duration-200"
+                  >
+                    <LogOut size={18} /> Sign Out
+                  </button>
+                </>
+              ) : (
+                <Link
+                  to="/auth"
+                  onClick={() => setOpen(false)}
+                  className="text-base font-medium tracking-wide py-4 px-4 rounded-xl text-foreground flex items-center gap-3 active:bg-muted border border-transparent active:border-border transition-all duration-200"
+                >
+                  <LogIn size={18} /> Sign In
+                </Link>
+              )}
+
+              {/* CTA */}
               <Link
                 to="/listings"
                 onClick={() => setOpen(false)}
-                className="bg-primary text-primary-foreground px-5 py-3.5 rounded-lg text-sm font-medium text-center mt-3 uppercase tracking-wide hover:bg-primary/90 transition-all duration-300"
+                className="bg-primary text-primary-foreground px-6 py-4 rounded-xl text-base font-semibold text-center mt-4 uppercase tracking-wide hover:bg-primary/90 active:bg-primary/80 transition-all duration-300"
               >
                 Book Now
               </Link>

@@ -212,18 +212,20 @@ const AdminDashboard = () => {
           </div>
         </motion.div>
 
-        {/* Tabs */}
-        <div className="flex items-center gap-1 bg-muted rounded-lg p-1 w-full overflow-x-auto">
+        {/* Tabs - scrollable on mobile */}
+        <div className="flex items-center gap-1 bg-muted rounded-lg p-1 w-full overflow-x-auto scrollbar-hide">
           {tabs.map((tab) => (
             <button
               key={tab.key}
               onClick={() => setActiveTab(tab.key)}
-              className={`flex-1 sm:flex-none px-3 sm:px-5 py-2.5 rounded text-xs sm:text-sm font-medium tracking-wide transition-all duration-300 whitespace-nowrap ${
+              className={`flex items-center gap-1.5 px-3 sm:px-4 py-2.5 rounded text-[11px] sm:text-xs font-medium tracking-wide transition-all duration-300 whitespace-nowrap min-w-fit ${
                 activeTab === tab.key ? "bg-card text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"
               }`}
             >
-              <tab.icon size={14} className="inline mr-1.5" />
-              {tab.label} ({tab.count})
+              <tab.icon size={13} className="flex-shrink-0" />
+              <span className="hidden sm:inline">{tab.label}</span>
+              <span className="sm:hidden">{tab.label.split(" ")[0]}</span>
+              <span className="text-[10px] opacity-60">({tab.count})</span>
             </button>
           ))}
         </div>

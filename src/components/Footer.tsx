@@ -34,7 +34,7 @@ const Footer = () => {
           <div className="luxury-divider mt-5" />
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-8 md:gap-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 md:gap-12">
           {/* Desktop logo - hidden on mobile */}
           <div className="hidden md:block md:col-span-1">
             <Link to="/" className="flex items-center gap-3" onClick={scrollToTop}>

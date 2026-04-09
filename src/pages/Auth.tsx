@@ -137,7 +137,7 @@ const Auth = () => {
           <button
             onClick={async () => {
               const { error } = await lovable.auth.signInWithOAuth("google", {
-                redirect_uri: window.location.origin,
+                redirect_uri: 'https://bookcomfyville.com/auth/callback'
               });
               if (error) toast.error(error.message);
             }}

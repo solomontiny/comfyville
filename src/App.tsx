@@ -2,13 +2,15 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 import { AuthProvider } from "@/hooks/useAuth";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import ChatBot from "@/components/ChatBot";
 import ScrollToTop from "@/components/ScrollToTop";
+import PageTransition from "@/components/PageTransition";
 import Index from "./pages/Index";
 import Listings from "./pages/Listings";
 import ListingDetail from "./pages/ListingDetail";
@@ -32,6 +34,36 @@ import Store from "./pages/Store";
 
 const queryClient = new QueryClient();
 
+const AnimatedRoutes = () => {
+  const location = useLocation();
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<PageTransition><Index /></PageTransition>} />
+        <Route path="/listings" element={<PageTransition><Listings /></PageTransition>} />
+        <Route path="/listings/:id" element={<PageTransition><ListingDetail /></PageTransition>} />
+        <Route path="/about" element={<PageTransition><About /></PageTransition>} />
+        <Route path="/mission-vision" element={<PageTransition><MissionVision /></PageTransition>} />
+        <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
+        <Route path="/auth" element={<PageTransition><Auth /></PageTransition>} />
+        <Route path="/dashboard" element={<PageTransition><Dashboard /></PageTransition>} />
+        <Route path="/services" element={<PageTransition><Services /></PageTransition>} />
+        <Route path="/services/property-sales-rentals" element={<PageTransition><PropertySalesRentals /></PageTransition>} />
+        <Route path="/services/short-term-apartments" element={<PageTransition><ShortTermApartments /></PageTransition>} />
+        <Route path="/services/property-management" element={<PageTransition><PropertyManagement /></PageTransition>} />
+        <Route path="/services/land-investment" element={<PageTransition><LandInvestment /></PageTransition>} />
+        <Route path="/services/luxury-interior" element={<PageTransition><LuxuryInterior /></PageTransition>} />
+        <Route path="/services/investor-guidance" element={<PageTransition><InvestorGuidance /></PageTransition>} />
+        <Route path="/join-team" element={<PageTransition><JoinTeam /></PageTransition>} />
+        <Route path="/our-team" element={<PageTransition><OurTeam /></PageTransition>} />
+        <Route path="/store" element={<PageTransition><Store /></PageTransition>} />
+        <Route path="/admin" element={<PageTransition><AdminDashboard /></PageTransition>} />
+        <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
+      </Routes>
+    </AnimatePresence>
+  );
+};
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
@@ -41,28 +73,7 @@ const App = () => (
         <AuthProvider>
           <ScrollToTop />
           <Navbar />
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/listings" element={<Listings />} />
-            <Route path="/listings/:id" element={<ListingDetail />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/mission-vision" element={<MissionVision />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/auth" element={<Auth />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/services/property-sales-rentals" element={<PropertySalesRentals />} />
-            <Route path="/services/short-term-apartments" element={<ShortTermApartments />} />
-            <Route path="/services/property-management" element={<PropertyManagement />} />
-            <Route path="/services/land-investment" element={<LandInvestment />} />
-            <Route path="/services/luxury-interior" element={<LuxuryInterior />} />
-            <Route path="/services/investor-guidance" element={<InvestorGuidance />} />
-            <Route path="/join-team" element={<JoinTeam />} />
-            <Route path="/our-team" element={<OurTeam />} />
-            <Route path="/store" element={<Store />} />
-            <Route path="/admin" element={<AdminDashboard />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <AnimatedRoutes />
           <Footer />
           <WhatsAppButton />
           <ChatBot />

@@ -1,10 +1,20 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.49.4";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers":
     "authorization, x-client-info, apikey, content-type",
 };
+
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
 
 serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -14,14 +24,67 @@ serve(async (req) => {
   try {
     const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
     if (!RESEND_API_KEY) {
-      throw new Error("RESEND_API_KEY is not configured");
+      console.error("RESEND_API_KEY is not configured");
+      throw new Error("Email service not configured");
     }
 
-    const { name, phone, date, time, listingTitle } = await req.json();
+    // Verify the caller's identity
+    const authHeader = req.headers.get("Authorization");
+    if (!authHeader) {
+      return new Response(
+        JSON.stringify({ success: false, error: "Unauthorized" }),
+        { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
+    const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+
+    // Create client with user's JWT to get their identity
+    const supabaseUser = createClient(supabaseUrl, Deno.env.get("SUPABASE_ANON_KEY")!, {
+      global: { headers: { Authorization: authHeader } },
+    });
+    const { data: { user }, error: userError } = await supabaseUser.auth.getUser();
+    if (userError || !user) {
+      return new Response(
+        JSON.stringify({ success: false, error: "Unauthorized" }),
+        { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    const { appointmentId } = await req.json();
+    if (!appointmentId || typeof appointmentId !== "string") {
+      return new Response(
+        JSON.stringify({ success: false, error: "Invalid request" }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    // Use service role to look up the actual appointment from DB
+    const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey);
+    const { data: appointment, error: apptError } = await supabaseAdmin
+      .from("appointments")
+      .select("*")
+      .eq("id", appointmentId)
+      .eq("user_id", user.id)
+      .single();
+
+    if (apptError || !appointment) {
+      return new Response(
+        JSON.stringify({ success: false, error: "Appointment not found" }),
+        { status: 404, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    // Use data from DB only — never trust client-supplied content
+    const name = escapeHtml(appointment.name);
+    const phone = escapeHtml(appointment.phone || "Not provided");
+    const date = escapeHtml(appointment.appointment_date);
+    const time = escapeHtml(appointment.appointment_time);
+    const listingTitle = escapeHtml(appointment.listing_title);
 
     const adminEmail = "info@bookcomfyville.com";
 
-    // Send notification to admin
     const adminRes = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
@@ -58,7 +121,7 @@ serve(async (req) => {
                 </tr>
                 <tr>
                   <td style="padding: 12px 0; color: #6b7280; font-size: 13px;">Phone</td>
-                  <td style="padding: 12px 0; color: #111827; font-size: 14px; font-weight: 500;">📞 ${phone || "Not provided"}</td>
+                  <td style="padding: 12px 0; color: #111827; font-size: 14px; font-weight: 500;">📞 ${phone}</td>
                 </tr>
               </table>
               <div style="margin-top: 24px; padding: 16px; background: #fef3c7; border-radius: 6px; border-left: 4px solid #f59e0b;">
@@ -77,7 +140,7 @@ serve(async (req) => {
     if (!adminRes.ok) {
       const errorData = await adminRes.text();
       console.error("Resend API error:", errorData);
-      throw new Error(`Failed to send email: ${adminRes.status}`);
+      throw new Error("Failed to send email");
     }
 
     const data = await adminRes.json();
@@ -88,9 +151,8 @@ serve(async (req) => {
     });
   } catch (error: unknown) {
     console.error("Error sending appointment email:", error);
-    const message = error instanceof Error ? error.message : "Unknown error";
     return new Response(
-      JSON.stringify({ success: false, error: message }),
+      JSON.stringify({ success: false, error: "Email notification failed. Please try again." }),
       {
         status: 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" },

@@ -1,4 +1,3 @@
-import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { HashRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
@@ -65,18 +64,16 @@ const AnimatedRoutes = () => {
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <HashRouter>
-        <AuthProvider>
-          <ScrollToTop />
-          <Navbar />
-          <AnimatedRoutes />
-          <Footer />
-          <WhatsAppButton />
-          <ChatBot />
-        </AuthProvider>
-      </HashRouter>
-    </TooltipProvider>
+    <HashRouter>
+      <AuthProvider>
+        <ScrollToTop />
+        <Navbar />
+        <AnimatedRoutes />
+        <Footer />
+        <WhatsAppButton />
+        <ChatBot />
+      </AuthProvider>
+    </HashRouter>
   </QueryClientProvider>
 );
 

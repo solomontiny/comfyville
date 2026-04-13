@@ -7,7 +7,7 @@ import { format } from "date-fns";
 import {
   CalendarDays, Users, MessageSquare, Mail, Shield, ArrowRight,
   LogIn, Clock, XCircle, CheckCircle, Loader2, Search, Download,
-  ChevronDown, Image
+  ChevronDown, Image, Upload
 } from "lucide-react";
 import ServiceImageManager from "@/components/admin/ServiceImageManager";
 import PropertyImageManager from "@/components/admin/PropertyImageManager";

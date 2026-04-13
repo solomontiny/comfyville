@@ -35,10 +35,26 @@ const Navbar = () => {
   const [servicesOpen, setServicesOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const servicesRef = useRef<HTMLDivElement>(null);
   const moreRef = useRef<HTMLDivElement>(null);
   const { pathname } = useLocation();
   const { user, signOut } = useAuth();
+
+  // Check admin role
+  useEffect(() => {
+    if (!user) { setIsAdmin(false); return; }
+    const check = async () => {
+      const { data } = await supabase
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", user.id)
+        .eq("role", "admin")
+        .maybeSingle();
+      setIsAdmin(!!data);
+    };
+    check();
+  }, [user]);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);

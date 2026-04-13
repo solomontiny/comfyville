@@ -7,7 +7,7 @@ import { format } from "date-fns";
 import {
   CalendarDays, Users, MessageSquare, Mail, Shield, ArrowRight,
   LogIn, Clock, XCircle, CheckCircle, Loader2, Search, Download,
-  ChevronDown, Image
+  ChevronDown, Image, Upload
 } from "lucide-react";
 import ServiceImageManager from "@/components/admin/ServiceImageManager";
 import PropertyImageManager from "@/components/admin/PropertyImageManager";
@@ -408,6 +408,17 @@ const AdminDashboard = () => {
           </>
         )}
       </section>
+
+      {/* Floating upload button on mobile */}
+      {activeTab !== "properties" && (
+        <button
+          onClick={() => setActiveTab("properties")}
+          className="fixed bottom-24 right-4 z-40 lg:hidden w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-lg flex items-center justify-center hover:bg-primary/90 active:scale-95 transition-all duration-200"
+          aria-label="Upload property photos"
+        >
+          <Upload size={22} />
+        </button>
+      )}
     </main>
   );
 };

@@ -361,6 +361,29 @@ const Navbar = () => {
               {/* Auth */}
               {user ? (
                 <>
+                  {isAdmin && (
+                    <Link
+                      to="/admin"
+                      onClick={() => setOpen(false)}
+                      className={`text-base font-semibold tracking-wide py-4 px-4 rounded-xl transition-all duration-200 flex items-center gap-3 border ${
+                        pathname === "/admin"
+                          ? "text-primary-foreground bg-primary border-primary"
+                          : "text-primary bg-primary/10 border-primary/30 active:bg-primary/20"
+                      }`}
+                    >
+                      <Shield size={18} /> Admin Panel
+                    </Link>
+                  )}
+                  {isAdmin && (
+                    <Link
+                      to="/admin"
+                      onClick={() => setOpen(false)}
+                      state={{ tab: "properties" }}
+                      className="text-base font-semibold tracking-wide py-4 px-4 rounded-xl transition-all duration-200 flex items-center gap-3 border text-accent-foreground bg-accent/80 border-accent/50 active:bg-accent"
+                    >
+                      <Upload size={18} /> Upload Property Photos
+                    </Link>
+                  )}
                   <Link
                     to="/dashboard"
                     onClick={() => setOpen(false)}

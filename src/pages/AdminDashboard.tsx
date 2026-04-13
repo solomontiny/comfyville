@@ -51,8 +51,10 @@ const statusColor = (status: string) => {
 const AdminDashboard = () => {
   const { user, loading: authLoading } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
-  const [activeTab, setActiveTab] = useState<"appointments" | "subscribers" | "chats" | "images" | "properties">("appointments");
+  const initialTab = (location.state as any)?.tab === "properties" ? "properties" : "appointments";
+  const [activeTab, setActiveTab] = useState<"appointments" | "subscribers" | "chats" | "images" | "properties">(initialTab as any);
   const [appointments, setAppointments] = useState<AdminAppointment[]>([]);
   const [subscribers, setSubscribers] = useState<Subscriber[]>([]);
   const [chatLogs, setChatLogs] = useState<ChatLog[]>([]);

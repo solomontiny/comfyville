@@ -191,6 +191,18 @@ const Navbar = () => {
 
           {user ? (
             <div className="flex items-center gap-4 ml-2">
+              {isAdmin && (
+                <Link
+                  to="/admin"
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-semibold tracking-wide transition-all duration-300 ${
+                    pathname === "/admin"
+                      ? "bg-primary text-primary-foreground"
+                      : "bg-primary/10 text-primary border border-primary/30 hover:bg-primary/20"
+                  }`}
+                >
+                  <Shield size={14} /> Admin
+                </Link>
+              )}
               <Link
                 to="/dashboard"
                 className={`${linkClass(pathname === "/dashboard")} flex items-center gap-1.5`}

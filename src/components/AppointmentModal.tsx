@@ -69,7 +69,7 @@ const AppointmentModal = ({
     setSaving(true);
 
     // Save to database
-    const { error } = await supabase.from("appointments").insert({
+    const { data: insertedAppt, error } = await supabase.from("appointments").insert({
       user_id: user.id,
       listing_id: listingId,
       listing_title: listingTitle,
@@ -77,9 +77,9 @@ const AppointmentModal = ({
       appointment_time: time,
       name,
       phone: phone || null,
-    });
+    }).select("id").single();
 
-    if (error) {
+    if (error || !insertedAppt) {
       toast.error("Failed to save appointment. Please try again.");
       setSaving(false);
       return;
@@ -95,13 +95,7 @@ const AppointmentModal = ({
     // Send email notification to admin
     try {
       await supabase.functions.invoke("send-appointment-email", {
-        body: {
-          name,
-          phone: phone || null,
-          date: formattedDate,
-          time,
-          listingTitle,
-        },
+        body: { appointmentId: insertedAppt.id },
       });
     } catch (emailErr) {
       console.error("Email notification failed:", emailErr);

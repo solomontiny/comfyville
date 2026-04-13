@@ -24,11 +24,14 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v6
         with:
-          node-version: lts/*
+          node-version: 20
           cache: "npm"
 
       - name: Install
         run: npm ci
+
+      - name: Update browserslist
+        run: npx update-browserslist-db@latest
 
       - name: Build
         run: npm run build

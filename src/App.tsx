@@ -1,7 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { HashRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import { AuthProvider } from "@/hooks/useAuth";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -65,14 +64,12 @@ const AnimatedRoutes = () => {
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <HashRouter>
-      <AuthProvider>
-        <ScrollToTop />
-        <Navbar />
-        <AnimatedRoutes />
-        <Footer />
-        <WhatsAppButton />
-        <ChatBot />
-      </AuthProvider>
+      <ScrollToTop />
+      <Navbar />
+      <AnimatedRoutes />
+      <Footer />
+      <WhatsAppButton />
+      <ChatBot />
     </HashRouter>
   </QueryClientProvider>
 );

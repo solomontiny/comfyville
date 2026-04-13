@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, LogIn, LogOut, LayoutDashboard, ChevronDown } from "lucide-react";
+import { Menu, X, LogIn, LogOut, LayoutDashboard, ChevronDown, Shield, Upload } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
 import logo from "@/assets/logo.jpeg";
 
 const primaryLinks = [
@@ -34,10 +35,26 @@ const Navbar = () => {
   const [servicesOpen, setServicesOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const servicesRef = useRef<HTMLDivElement>(null);
   const moreRef = useRef<HTMLDivElement>(null);
   const { pathname } = useLocation();
   const { user, signOut } = useAuth();
+
+  // Check admin role
+  useEffect(() => {
+    if (!user) { setIsAdmin(false); return; }
+    const check = async () => {
+      const { data } = await supabase
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", user.id)
+        .eq("role", "admin")
+        .maybeSingle();
+      setIsAdmin(!!data);
+    };
+    check();
+  }, [user]);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -174,6 +191,18 @@ const Navbar = () => {
 
           {user ? (
             <div className="flex items-center gap-4 ml-2">
+              {isAdmin && (
+                <Link
+                  to="/admin"
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-semibold tracking-wide transition-all duration-300 ${
+                    pathname === "/admin"
+                      ? "bg-primary text-primary-foreground"
+                      : "bg-primary/10 text-primary border border-primary/30 hover:bg-primary/20"
+                  }`}
+                >
+                  <Shield size={14} /> Admin
+                </Link>
+              )}
               <Link
                 to="/dashboard"
                 className={`${linkClass(pathname === "/dashboard")} flex items-center gap-1.5`}
@@ -332,6 +361,29 @@ const Navbar = () => {
               {/* Auth */}
               {user ? (
                 <>
+                  {isAdmin && (
+                    <Link
+                      to="/admin"
+                      onClick={() => setOpen(false)}
+                      className={`text-base font-semibold tracking-wide py-4 px-4 rounded-xl transition-all duration-200 flex items-center gap-3 border ${
+                        pathname === "/admin"
+                          ? "text-primary-foreground bg-primary border-primary"
+                          : "text-primary bg-primary/10 border-primary/30 active:bg-primary/20"
+                      }`}
+                    >
+                      <Shield size={18} /> Admin Panel
+                    </Link>
+                  )}
+                  {isAdmin && (
+                    <Link
+                      to="/admin"
+                      onClick={() => setOpen(false)}
+                      state={{ tab: "properties" }}
+                      className="text-base font-semibold tracking-wide py-4 px-4 rounded-xl transition-all duration-200 flex items-center gap-3 border text-accent-foreground bg-accent/80 border-accent/50 active:bg-accent"
+                    >
+                      <Upload size={18} /> Upload Property Photos
+                    </Link>
+                  )}
                   <Link
                     to="/dashboard"
                     onClick={() => setOpen(false)}

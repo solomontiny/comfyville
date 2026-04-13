@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { format } from "date-fns";
@@ -51,8 +51,10 @@ const statusColor = (status: string) => {
 const AdminDashboard = () => {
   const { user, loading: authLoading } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
-  const [activeTab, setActiveTab] = useState<"appointments" | "subscribers" | "chats" | "images" | "properties">("appointments");
+  const initialTab = (location.state as any)?.tab === "properties" ? "properties" : "appointments";
+  const [activeTab, setActiveTab] = useState<"appointments" | "subscribers" | "chats" | "images" | "properties">(initialTab as any);
   const [appointments, setAppointments] = useState<AdminAppointment[]>([]);
   const [subscribers, setSubscribers] = useState<Subscriber[]>([]);
   const [chatLogs, setChatLogs] = useState<ChatLog[]>([]);
